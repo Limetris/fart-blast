@@ -1,0 +1,18 @@
+{
+  "extends": "@istanbuljs/nyc-config-typescript",
+  "all": true,
+  "include": [
+    "assets/src/logic/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules/"
+  ],
+  "extension": [
+    ".ts"
+  ],
+  "reporter": [
+    "text-summary",
+    "html"
+  ],
+  "report-dir": "./coverage"
+}

@@ -3,5 +3,19 @@
   "uuid": "9be9c4c1-8af3-4ddb-9a6f-41436d2c2d86",
   "creator": {
     "version": "3.7.2"
+  },
+  "scripts": {
+    "test": "nyc ./node_modules/.bin/_mocha 'tests/**/*.test.ts'",
+    "coverage": "nyc -r lcov -e .ts -x \"tests/**/*.test.ts\" npm run test"
+  },
+  "devDependencies": {
+    "@testdeck/mocha": "^0.3.3",
+    "@types/chai": "^4.3.4",
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
+    "mocha-typescript": "^1.1.17",
+    "nyc": "^15.1.0",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0"
   }
 }
