@@ -1,6 +1,6 @@
 import {CellDataAsUnion} from "./entities/EntityCell";
 import {Tile} from "./tiles/Tile";
-import {BlockType, BonusType, ColorType} from "./entities/EntityTile";
+import {BlockType, BonusType, ColorType, COLORS} from "./entities/EntityTile";
 import {TileColor} from "./tiles/TileColor";
 import {TileRocket} from "./tiles/bonus/TileRocket";
 import {TileBomb} from "./tiles/bonus/TileBomb";
@@ -37,6 +37,12 @@ class TileFactory {
 
     createTileColor(colorType: ColorType): TileColor {
         return new TileColor(colorType);
+    }
+
+    get random(): Tile {
+        const colorIndex = Math.floor(Math.random() * COLORS.length);
+        return this.create(<CellDataAsUnion> COLORS[colorIndex]);
+
     }
 }
 

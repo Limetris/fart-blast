@@ -77,7 +77,7 @@ const D = 'disco';
         assert.equal(this.obj.getCell(3, 4).type, CellType.hole);
 
         assert.equal(this.obj.getCell(2, 4).tile, undefined);
-        assert.equal(this.obj.getCell(2, 0).tile, undefined);
+        assert(this.obj.getCell(2, 0).tile);
 
         assert(this.obj.getCell(2, 2).tile);
         assert.equal(this.obj.getCell(2, 2).tile.type, ColorType.yellow);
@@ -85,6 +85,18 @@ const D = 'disco';
         assert.equal(this.obj.getCell(4, 2).tile.type, ColorType.purple);
         assert.equal(this.obj.getCell(5, 2).tile.type, ColorType.blue);
         assert.equal(this.obj.getCell(6, 2).tile.type, ColorType.green);
+    }
+
+    @test 'filling' () {
+        this.obj.cells.forEach((column) => {
+            column.forEach((cell) => {
+                if (!cell.isHole) {
+                    assert(cell.tile);
+                    assert(cell.tile.type in ColorType);
+                }
+            })
+        });
+
     }
 
 

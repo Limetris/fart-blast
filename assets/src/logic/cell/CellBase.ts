@@ -11,4 +11,8 @@ export class CellBase implements ICellData{
         this.y = y;
         this.type = type;
     }
+
+    get isHole(): boolean {
+        return this.type === CellType.hole;
+    }
 }

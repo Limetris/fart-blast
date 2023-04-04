@@ -11,6 +11,7 @@ export class GameField extends  GameFieldData{
         super(gameFieldData);
 
         this._parse();
+        this._fill();
     }
 
     get cells (): Cell[][] {
@@ -49,5 +50,14 @@ export class GameField extends  GameFieldData{
         cell.add(obj);
         return cell;
     }
+
+    private _fill () {
+        this._cells.forEach((column, x) => {
+            column.forEach((cell, y) => {
+                cell.fill();
+            });
+        });
+    }
+
 }
 

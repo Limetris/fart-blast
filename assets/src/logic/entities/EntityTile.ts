@@ -18,3 +18,8 @@ export enum BonusType {
 }
 
 export type TileType = ColorType | BlockType | BonusType;
+
+
+export const COLORS = Object.keys(ColorType);
+export const BLOCKS = Object.keys(BlockType);
+export const BONUSES = Object.keys(BonusType);
