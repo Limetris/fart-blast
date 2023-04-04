@@ -1,5 +1,5 @@
 import { suite, test, should, expect } from './tests';
-import {CellBase} from "@src/cell/CellBase";
+import {CellBase} from "../assets/src/logic/cell/CellBase";
 
 @suite class CellBaseTest {
 

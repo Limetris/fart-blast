@@ -10,10 +10,8 @@
     "noImplicitAny": false,
     "typeRoots" : [
       "../node_modules/@types"
-    ],
-    "paths": {
-      "@src/*": ["../assets/src/logic/*"]
-    }
+    ]
+
   },
   "exclude": [
     "../node_modules"
