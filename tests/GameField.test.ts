@@ -1,5 +1,5 @@
 import {expect, suite, test} from './tests';
-import {GameField} from "../assets/src/logic/GameField";
+import {GameField} from "../assets/src/logic/field/GameField";
 import {IGameFieldData} from "../assets/src/logic/entities/EntityGame";
 import {Tile} from '../assets/src/logic/tiles/Tile';
 import {BlockType, BonusType, ColorType} from "../assets/src/logic/entities/EntityTile";
@@ -48,10 +48,9 @@ const D = 'disco';
     }
 
     @test 'size' () {
-        expect(this.obj.columns).equal(9);
-        expect(this.obj.rows).equal(8);
+        expect(this.obj.columnCount).equal(9);
+        expect(this.obj.rowCount).equal(8);
     }
-
 
     @test 'check types' () {
         let tile = new Tile(BlockType.box);
@@ -60,7 +59,6 @@ const D = 'disco';
         assert(obj in BonusType);
         assert(BonusType[obj] === BonusType.rocket);
         assert('rocket' ===  BonusType[BonusType.rocket]);
-
     }
 
     @test 'getCell' () {
@@ -88,8 +86,8 @@ const D = 'disco';
     }
 
     @test 'filling' () {
-        this.obj.cells.forEach((column) => {
-            column.forEach((cell) => {
+        this.obj.columns.forEach((column) => {
+            column.cells.forEach((cell) => {
                 if (!cell.isHole) {
                     assert(cell.tile);
                     assert(cell.tile.type in ColorType);
@@ -98,6 +96,4 @@ const D = 'disco';
         });
 
     }
-
-
 }
