@@ -18,9 +18,7 @@ const TILE_CLASSES = {
 };
 
 class TileFactory {
-
     constructor() {
-
     }
 
     create (obj: CellDataAsUnion): Tile | undefined {

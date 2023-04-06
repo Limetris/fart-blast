@@ -7,6 +7,7 @@ export class Column {
     private _cells: Cell[];
 
     constructor(x: number, columnData: ColumnData) {
+        this.x = x;
         this._parse(columnData);
         this.fill();
     }

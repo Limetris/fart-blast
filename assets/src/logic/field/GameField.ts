@@ -35,7 +35,7 @@ export class GameField extends  GameFieldData{
     private _parse () {
         this._columns = [];
 
-        this.gameData.matrix.forEach((columnData, x) => {
+        this.gameData.field.forEach((columnData, x) => {
             let column = this._createColumn(x, columnData);
             this._columns.push(column);
         });

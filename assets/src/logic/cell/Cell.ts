@@ -15,6 +15,10 @@ export class Cell extends CellBase {
         return (this._tiles.length === 0);
     }
 
+    get tiles(): Tile[] {
+        return this._tiles;
+    }
+
     add (obj: Tile | CellDataAsUnion): Tile {
         if(this.isHole)
             return;

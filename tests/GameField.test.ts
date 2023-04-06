@@ -29,7 +29,7 @@ const D = 'disco';
     before() {
 
         const data: IGameFieldData = {
-            matrix: [
+            field: [
                 [_, e, e, e, e, e, e, e, _],
                 [e, e, e, e, e, e, e, e, e],
                 [e, e, y, r, p, b, g, e, e],
