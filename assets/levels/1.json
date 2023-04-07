@@ -1,7 +1,7 @@
 {
   "field": [
     ["hole", "cell", "cell", "cell", "cell", "cell", "cell", "cell", "hole"],
-    ["cell", "cell", "cell", "cell", "cell", "cell", "cell", "cell", "cell"],
+    ["cell", "cell", "yellow", "yellow", "yellow", "yellow", "yellow", "yellow", "cell"],
     ["cell", "cell", "yellow", "red", "purple", "blue", "green", "cell", "cell"],
     ["cell", "cell", "cell", "cell", "cell", "cell", "cell", "cell", "cell"],
     ["cell", "cell", "hole", "hole", "hole", "hole", "hole", "cell", "cell"],
