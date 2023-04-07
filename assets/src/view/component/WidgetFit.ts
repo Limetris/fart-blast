@@ -45,7 +45,7 @@ export class WidgetFit extends Component {
     private _ratio: number = 0;
     start () {
         this._transform = this.getComponent(UITransform);
-        this._startScale = this.node.scale.clone();
+        // this._startScale = this.node.scale.clone();
         this._startSize = size(this._transform.width * this._startScale.x, this._transform.height * this._startScale.y);
         this._ratio = this._startSize.width / this._startSize.height;
         if(!this._target)
@@ -62,6 +62,7 @@ export class WidgetFit extends Component {
         this._targetTransform = undefined;
         if (!this._target)
             return;
+
         this._initTransform();
         this._initListeners();
         this._resized();
@@ -98,11 +99,6 @@ export class WidgetFit extends Component {
             case WidgetFitType.ALL:
                 let scale = Math.min(this._targetTransform.width / this._startSize.width, this._targetTransform.height / this._startSize.height);
                 this.node.scale = v3(scale, scale, scale);
-
-                // if (this._ratio > 1)
-                //     this._fitHeight();
-                // else
-                //     this._fitWidth();
                 break;
         }
     }
@@ -110,14 +106,10 @@ export class WidgetFit extends Component {
     private _fitWidth() {
         const scale = this._targetTransform.width / this._startSize.width;
         this.node.scale = v3(scale, scale, scale);
-        // this._transform.width = this._targetTransform.width;
-        // this._transform.height = this._transform.width / this._ratio;
     }
 
     private _fitHeight() {
         const scale = this._targetTransform.height / this._startSize.height;
         this.node.scale = v3(scale, scale, scale);
-        // this._transform.height = this._targetTransform.height;
-        // this._transform.width = this._transform.height * this._ratio;
     }
 }
