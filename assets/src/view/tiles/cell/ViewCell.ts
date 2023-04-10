@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, UITransform, Sprite } from 'cc';
+import { _decorator, Component, Node, UITransform, Sprite, Button, log } from 'cc';
 import {Cell} from "../../../logic/cell/Cell";
 import {Tile} from "../../../logic/tiles/Tile";
 import {IconFactory} from "../../IconFactory";
@@ -13,12 +13,12 @@ export class ViewCell extends Component {
     @property(CellBack)
     back: CellBack = undefined;
 
-    cellData: Cell;
+    cell: Cell;
     viewGameFiled: ViewGameField;
 
     init(viewGameField: ViewGameField, cell: Cell) {
         this.viewGameFiled = viewGameField;
-        this.cellData = cell;
+        this.cell = cell;
         this._initBack();
         this._createIcons();
     }
@@ -26,7 +26,7 @@ export class ViewCell extends Component {
     private _initBack() {
         if (!this.back)
             return;
-        this.back.init(this.cellData);
+        this.back.init(this.cell);
         const worldPos = this.back.node.worldPosition;
         this.back.node.setParent(this.viewGameFiled.background);
         this.back.node.setWorldPosition(worldPos);
@@ -34,7 +34,7 @@ export class ViewCell extends Component {
     }
 
     private _createIcons() {
-        this.cellData.tiles.forEach(tile => this._createIcon(tile));
+        this.cell.tiles.forEach(tile => this._createIcon(tile));
     }
 
     private _createIcon(tile: Tile) {
@@ -43,11 +43,21 @@ export class ViewCell extends Component {
     }
 
     onLoad() {
+        this.node.on(Node.EventType.TOUCH_END, this.onClick, this);
+    }
+
+    onDestroy() {
+        this.node.off(Node.EventType.TOUCH_END, this.onClick, this);
+    }
+
+    onClick(event) {
+        if(this.cell.isHole)
+            return;
+
+        const tile = this.cell.tile;
+        log(`cell [${this.cell.x},${this.cell.y}] click: ${tile.typeString}`);
 
     }
 
-    update(deltaTime: number) {
-
-    }
 }
 
