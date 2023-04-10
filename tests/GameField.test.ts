@@ -1,30 +1,14 @@
 import {expect, suite, test} from './tests';
-import {GameField} from "../assets/src/logic/field/GameField";
+import {GameFieldLogic} from "../assets/src/logic/field/GameFieldLogic";
 import {IGameFieldData} from "../assets/src/logic/entities/EntityGame";
 import {Tile} from '../assets/src/logic/tiles/Tile';
 import {BlockType, BonusType, ColorType} from "../assets/src/logic/entities/EntityTile";
 import {assert} from 'chai';
 import {CellDataAsUnion, CellType} from "../assets/src/logic/entities/EntityCell";
-
-
-const y = 'yellow';
-const r = 'red';
-const p = 'purple';
-const b = 'blue';
-const g = 'green';
-
-const e = 'cell';
-const _ = 'hole';
-
-const O = 'bubble';
-const X = 'box';
-
-const B = 'bomb';
-const R = 'rocket';
-const D = 'disco';
+import {y, r, p, b, e, g, _, B, D, O, R, X} from './short_id'
 
 @suite class GameFieldTest {
-    private obj: GameField;
+    private obj: GameFieldLogic;
 
     before() {
 
@@ -40,7 +24,7 @@ const D = 'disco';
                 [_, e, e, e, e, e, e, e, _]
             ]
         };
-        this.obj = new GameField(data);
+        this.obj = new GameFieldLogic(data);
     }
 
     @test 'is created' () {

@@ -2,7 +2,7 @@ import {_decorator, Component, Sprite, UITransform} from 'cc';
 import {CellBackSprite, CellBackType} from "./CellBackSprite";
 import {Cell} from "../../../logic/cell/Cell";
 import {CellBackFactory, CellMap} from "../../CellBackFactory";
-import {GameField} from "../../../logic/field/GameField";
+import {GameFieldLogic} from "../../../logic/field/GameFieldLogic";
 
 const { ccclass, requireComponent, property } = _decorator;
 

@@ -1,6 +1,6 @@
 import { _decorator, Component, Node, instantiate, UITransform, Prefab, Vec2, Size, size, v2 } from 'cc';
 import {IGameFieldData} from "../../logic/entities/EntityGame";
-import {GameField} from "../../logic/field/GameField";
+import {GameFieldLogic} from "../../logic/field/GameFieldLogic";
 import {IconFactory} from "../IconFactory";
 import {Cell} from "../../logic/cell/Cell";
 import {CellBack} from "../tiles/cell/CellBack";
@@ -22,12 +22,12 @@ export class ViewGameField extends Component {
     @property(Size)
     cellSize: Size = size(100, 100);
 
-    private _gameField: GameField;
+    private _gameField: GameFieldLogic;
     private _gameFieldTransform: UITransform;
     private _offset: Vec2 = Vec2.ZERO;
 
     init(filedData: IGameFieldData) {
-        this._gameField = new GameField(filedData);
+        this._gameField = new GameFieldLogic(filedData);
     }
 
     onLoad() {

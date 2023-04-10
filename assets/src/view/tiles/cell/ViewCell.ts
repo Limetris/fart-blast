@@ -2,7 +2,6 @@ import { _decorator, Component, Node, UITransform, Sprite, Button, log } from 'c
 import {Cell} from "../../../logic/cell/Cell";
 import {Tile} from "../../../logic/tiles/Tile";
 import {IconFactory} from "../../IconFactory";
-import {CellBackSprite} from "./CellBackSprite";
 import { CellBack } from './CellBack';
 import {ViewGameField} from "../../game/ViewGameField";
 const { ccclass, property } = _decorator;

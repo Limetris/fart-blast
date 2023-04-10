@@ -1,7 +1,7 @@
 import { _decorator, Component, Node } from 'cc';
 import {LevelsConfig} from "../LevelsConfig";
 import {IGameFieldData} from "../../logic/entities/EntityGame";
-import {GameField} from "../../logic/field/GameField";
+import {GameFieldLogic} from "../../logic/field/GameFieldLogic";
 import {ViewGameField} from "./ViewGameField";
 const { ccclass, property } = _decorator;
 

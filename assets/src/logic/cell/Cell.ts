@@ -2,17 +2,16 @@ import {CellDataAsUnion, CellType, ICellData} from "../entities/EntityCell";
 import {CellBase} from "./CellBase";
 import {Tile} from "../tiles/Tile";
 import TileFactory from "../TileFactory";
-import {GameField} from "../field/GameField";
+import {GameFieldCells} from "../field/GameFieldCells";
 
-export type CellCallback = (cell: Cell, i: number, j: number) => void;
+export type CellCallback = (cell: Cell) => void;
 
 export class Cell extends CellBase {
 
     private _tiles: Tile[] = [];
 
-    constructor(gameField: GameField, x: number, y: number, type: CellType = CellType.cell) {
-        super(gameField, x, y, type);
-
+    constructor(x: number, y: number, type: CellType = CellType.cell) {
+        super(x, y, type);
     }
 
     get isEmpty(): boolean {
@@ -23,7 +22,7 @@ export class Cell extends CellBase {
         return this._tiles;
     }
 
-    get tile(): Tile {
+    get tile(): Tile | undefined {
         return this._tiles[this._tiles.length - 1];
     }
 
@@ -50,7 +49,7 @@ export class Cell extends CellBase {
         return tile;
     }
 
-    eachNeighbor(callback: CellCallback) {
+    eachAround(callback: CellCallback) {
         if(!callback)
             return;
 
@@ -58,10 +57,23 @@ export class Cell extends CellBase {
             for(let y = this.y-1, j=0; y <= this.y+1; y++, j++) {
                 if (x == this.x && y == this.y)
                     continue;
-                let cell = this.gameField.getCell(x, y);
-                callback(cell, i, j);
+                this._callbackCell(this.gameField.getCell(x, y), callback)
             }
         }
+    }
+
+    eachNeighbor(callback: CellCallback) {
+        if(!callback || !this.gameField)
+            return;
+
+        this._callbackCell(this.gameField.getCell(this.x - 1, this.y), callback);
+        this._callbackCell(this.gameField.getCell(this.x, this.y - 1), callback);
+        this._callbackCell(this.gameField.getCell(this.x + 1, this.y), callback);
+        this._callbackCell(this.gameField.getCell(this.x, this.y + 1), callback);
+    }
+    private _callbackCell(cell, callback: CellCallback) {
+        if (cell)
+            callback(cell);
     }
 
 }
