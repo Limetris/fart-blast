@@ -1,0 +1,345 @@
+[
+  {
+    "__type__": "cc.Prefab",
+    "_name": "CellBackFactory",
+    "_objFlags": 0,
+    "_native": "",
+    "data": {
+      "__id__": 1
+    },
+    "optimizationPolicy": 0,
+    "persistent": false
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "CellBackFactory",
+    "_objFlags": 0,
+    "__editorExtras__": {},
+    "_parent": null,
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 2
+      }
+    ],
+    "_prefab": {
+      "__id__": 20
+    },
+    "_lpos": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_lrot": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_lscale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_mobility": 0,
+    "_layer": 1073741824,
+    "_euler": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_id": ""
+  },
+  {
+    "__type__": "06eefZrfcpN5LfoXYhDEarM",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 3
+    },
+    "backs": [
+      {
+        "__id__": 4
+      },
+      {
+        "__id__": 5
+      },
+      {
+        "__id__": 6
+      },
+      {
+        "__id__": 7
+      },
+      {
+        "__id__": 8
+      },
+      {
+        "__id__": 9
+      },
+      {
+        "__id__": 10
+      },
+      {
+        "__id__": 11
+      },
+      {
+        "__id__": 12
+      },
+      {
+        "__id__": 13
+      },
+      {
+        "__id__": 14
+      },
+      {
+        "__id__": 15
+      },
+      {
+        "__id__": 16
+      },
+      {
+        "__id__": 17
+      },
+      {
+        "__id__": 18
+      },
+      {
+        "__id__": 19
+      }
+    ],
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "d1SgW8WAtJ+aXAw68xvIb/"
+  },
+  {
+    "__type__": "CellBackSprite",
+    "type": 0,
+    "spriteFrame": {
+      "__uuid__": "43ad6ba7-145e-4b35-92ce-301e5d92d9c1@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
+    "offset": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    }
+  },
+  {
+    "__type__": "CellBackSprite",
+    "type": 1,
+    "spriteFrame": {
+      "__uuid__": "db36b672-6dbb-45ba-9006-c3accb149b1e@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
+    "offset": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    }
+  },
+  {
+    "__type__": "CellBackSprite",
+    "type": 2,
+    "spriteFrame": {
+      "__uuid__": "e18e2ed7-cf67-4ae3-bf21-6d711f16a0f2@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
+    "offset": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    }
+  },
+  {
+    "__type__": "CellBackSprite",
+    "type": 3,
+    "spriteFrame": {
+      "__uuid__": "4951b2e1-be2e-4ff0-a823-d626b581b455@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
+    "offset": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    }
+  },
+  {
+    "__type__": "CellBackSprite",
+    "type": 4,
+    "spriteFrame": {
+      "__uuid__": "e96aa286-4fc9-4105-a8bd-5acbdf2d520c@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
+    "offset": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    }
+  },
+  {
+    "__type__": "CellBackSprite",
+    "type": 5,
+    "spriteFrame": {
+      "__uuid__": "1d53f1df-e7a8-4d1c-a313-8a08f20b12e0@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
+    "offset": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    }
+  },
+  {
+    "__type__": "CellBackSprite",
+    "type": 6,
+    "spriteFrame": {
+      "__uuid__": "ba7644b8-e226-4a29-9469-aee80f84597a@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
+    "offset": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    }
+  },
+  {
+    "__type__": "CellBackSprite",
+    "type": 7,
+    "spriteFrame": {
+      "__uuid__": "437070eb-e2f3-4826-b456-ea05aa878faa@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
+    "offset": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": -9
+    }
+  },
+  {
+    "__type__": "CellBackSprite",
+    "type": 8,
+    "spriteFrame": {
+      "__uuid__": "f405f95c-f6c3-4aaf-8b22-3546f2f753ed@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
+    "offset": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    }
+  },
+  {
+    "__type__": "CellBackSprite",
+    "type": 9,
+    "spriteFrame": {
+      "__uuid__": "6ac9e061-121a-4cf5-8f26-aaa9174204ea@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
+    "offset": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    }
+  },
+  {
+    "__type__": "CellBackSprite",
+    "type": 10,
+    "spriteFrame": {
+      "__uuid__": "8ce5aa76-ff99-4d6a-9ddd-d725ea4c082d@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
+    "offset": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    }
+  },
+  {
+    "__type__": "CellBackSprite",
+    "type": 11,
+    "spriteFrame": {
+      "__uuid__": "415fa424-3496-4977-a4a7-2d7bfb23abd3@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
+    "offset": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    }
+  },
+  {
+    "__type__": "CellBackSprite",
+    "type": 12,
+    "spriteFrame": {
+      "__uuid__": "c462b4c3-439c-4f2c-9fd0-6d927adbd0ee@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
+    "offset": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    }
+  },
+  {
+    "__type__": "CellBackSprite",
+    "type": 13,
+    "spriteFrame": {
+      "__uuid__": "bb1dc86a-d892-4d8e-948c-e7fe93b13229@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
+    "offset": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 4
+    }
+  },
+  {
+    "__type__": "CellBackSprite",
+    "type": 14,
+    "spriteFrame": {
+      "__uuid__": "5447bac9-321a-448a-980e-6c07ad2bb5e1@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
+    "offset": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    }
+  },
+  {
+    "__type__": "CellBackSprite",
+    "type": 15,
+    "spriteFrame": {
+      "__uuid__": "32b26d22-2860-40c1-b0ba-b37e1f99669d@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
+    "offset": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    }
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__id__": 0
+    },
+    "fileId": "e5ICcKJl5LmaLaNhhWzJ4M",
+    "instance": null,
+    "targetOverrides": null
+  }
+]

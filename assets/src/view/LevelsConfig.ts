@@ -18,7 +18,6 @@ export class LevelsConfig extends Component {
     }
 
     onLoad() {
-        director.addPersistRootNode(this.node);
         assert(!LevelsConfig._instance, "Only one instance allowed");
         LevelsConfig._instance = this;
     }

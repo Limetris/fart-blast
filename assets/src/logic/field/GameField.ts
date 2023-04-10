@@ -19,7 +19,7 @@ export class GameField extends  GameFieldData{
     }
 
     getCell(x: number, y: number): Cell {
-        return this._columns[x].getCell(y);
+        return this._columns[x]?.getCell(y);
     }
 
     getColumn(columnIndex: number): Column {
@@ -42,7 +42,7 @@ export class GameField extends  GameFieldData{
     }
 
     private _createColumn(x: number, columnData: ColumnData): Column {
-        return new Column(x, columnData);
+        return new Column(this, x, columnData);
     }
 
 

@@ -1,12 +1,15 @@
 import {ColumnData} from "../entities/EntityGame";
 import {Cell} from "../cell/Cell";
 import {CellType, CellDataAsUnion} from "../entities/EntityCell";
+import {GameField} from "./GameField";
 
 export class Column {
+    readonly gameField: GameField;
     readonly x: number;
     private _cells: Cell[];
 
-    constructor(x: number, columnData: ColumnData) {
+    constructor(gameField: GameField, x: number, columnData: ColumnData) {
+        this.gameField = gameField;
         this.x = x;
         this._parse(columnData);
         this.fill();
@@ -37,10 +40,10 @@ export class Column {
     private _createCell(obj: CellDataAsUnion, x: number, y: number): Cell {
         let cell: Cell;
         if (obj === CellType[CellType.hole]) {
-            cell = new Cell(x, y, CellType.hole);
+            cell = new Cell(this.gameField, x, y, CellType.hole);
             return cell;
         }
-        cell = new Cell(x, y);
+        cell = new Cell(this.gameField, x, y);
         cell.add(obj);
         return cell;
     }

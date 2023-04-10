@@ -3,7 +3,8 @@ import {IGameFieldData} from "../../logic/entities/EntityGame";
 import {GameField} from "../../logic/field/GameField";
 import {IconFactory} from "../IconFactory";
 import {Cell} from "../../logic/cell/Cell";
-import { CellBack } from './CellBack';
+import {CellBack} from "../tiles/cell/CellBack";
+import {ViewCell} from "../tiles/cell/ViewCell";
 const { ccclass, property } = _decorator;
 
 @ccclass('ViewGameField')
@@ -11,6 +12,12 @@ export class ViewGameField extends Component {
 
     @property(Prefab)
     prefabCell: Prefab;
+
+    @property(Node)
+    background: Node;
+
+    @property(Node)
+    cells: Node;
 
     @property(Size)
     cellSize: Size = size(100, 100);
@@ -38,16 +45,16 @@ export class ViewGameField extends Component {
         });
     }
 
-    private _createCell(cell: Cell): CellBack {
+    private _createCell(cell: Cell): ViewCell {
         let node = instantiate(this.prefabCell);
         const transform = node.getComponent(UITransform);
-        node.setParent(this.node);
+        node.setParent(this.cells);
         node.setSiblingIndex(0);
         node.setPosition(cell.x * this.cellSize.width + this._offset.x, -cell.y * this.cellSize.height + this._offset.y);
 
-        let cellBack = node.getComponent(CellBack);
-        cellBack.init(cell);
-        return cellBack;
+        let viewCell = node.getComponent(ViewCell);
+        viewCell.init(this, cell);
+        return viewCell;
     }
 
 }

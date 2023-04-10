@@ -37,7 +37,6 @@ export class IconFactory extends Component {
     }
 
     onLoad() {
-        director.addPersistRootNode(this.node);
         assert(!IconFactory._instance, "Only one instance allowed");
         IconFactory._instance = this;
 
