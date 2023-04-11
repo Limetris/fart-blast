@@ -89,47 +89,47 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "a5NxGngR9BQaW5lNRmQApc"
+    "fileId": "f3ONp4md9AhLMgOvj7WRmj"
   },
   {
     "__type__": "PrefabColorTile",
+    "type": 2,
     "prefab": {
       "__uuid__": "5bbb68e1-ea6c-49a9-a372-b17519b21dfb",
       "__expectedType__": "cc.Prefab"
-    },
-    "type": 2
+    }
   },
   {
     "__type__": "PrefabColorTile",
+    "type": 3,
     "prefab": {
       "__uuid__": "127579d8-9a26-4b7b-ad01-79b185199e82",
       "__expectedType__": "cc.Prefab"
-    },
-    "type": 3
+    }
   },
   {
     "__type__": "PrefabColorTile",
+    "type": 4,
     "prefab": {
       "__uuid__": "78d0da09-f67e-4209-9407-93a19d69465d",
       "__expectedType__": "cc.Prefab"
-    },
-    "type": 4
+    }
   },
   {
     "__type__": "PrefabColorTile",
+    "type": 1,
     "prefab": {
       "__uuid__": "7f76d2e9-9877-4668-bf01-764bb9a362f2",
       "__expectedType__": "cc.Prefab"
-    },
-    "type": 1
+    }
   },
   {
     "__type__": "PrefabColorTile",
+    "type": 0,
     "prefab": {
       "__uuid__": "e77ee6cc-f22c-4c63-b779-ee022059042d",
       "__expectedType__": "cc.Prefab"
-    },
-    "type": 0
+    }
   },
   {
     "__type__": "cc.PrefabInfo",
