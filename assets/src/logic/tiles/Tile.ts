@@ -1,22 +1,49 @@
-import { TileType } from "../entities/EntityTile";
+import {BonusType, TileType} from "../entities/EntityTile";
 import {TileBase} from "./TileBase";
-import {TileGroup} from "./TileGroup";
+import {CellGroup} from "./CellGroup";
+import {CellTiles} from "../cell/CellTiles";
 
+export enum TileEvent {
+    hit,
+    destroy
+}
 export class Tile extends  TileBase {
 
-    private _group: TileGroup;
-    get group(): TileGroup { return this._group; };
+    protected hp: number = 1;
+
+    private _cell: CellTiles;
+    get cell(): CellTiles { return this._cell; };
 
     constructor(type: TileType) {
         super(type);
     }
 
-    setGroup(group: TileGroup) {
-        this._group = group;
+
+    setCell(cell: CellTiles) {
+        this._cell = cell;
     }
 
-    resetGroup() {
-        this._group = undefined;
+    resetCell() {
+        this._cell = undefined;
     }
 
+    hit(): Tile[] {
+        this.hp--;
+        this.dispatch(TileEvent.hit, this, this.cell);
+        return [this];
+    }
+
+    destroy() {
+        this.hp = 0;
+        this.dispatch(TileEvent.destroy, this, this.cell);
+        this.resetCell();
+    }
+
+    get isAlive(): boolean {
+        return this.hp > 0;
+    }
+
+    get isBonus(): boolean {
+        return this.type in BonusType;
+    }
 }

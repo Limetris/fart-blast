@@ -1,9 +1,10 @@
 import {CellType, ICellData} from "../entities/EntityCell";
 import {GameFieldCells} from "../field/GameFieldCells";
 
-export class CellBase implements ICellData{
+export class CellBase implements ICellData {
 
     gameField: GameFieldCells;
+
     readonly type: CellType;
     readonly x: number;
     readonly y: number;

@@ -3,7 +3,7 @@ import {Tile} from "./Tile";
 import { Cell } from "../cell/Cell";
 import {GameFieldCells} from "../field/GameFieldCells";
 import {BonusType, TileType} from "../entities/EntityTile";
-import { TileGroup } from "./TileGroup";
+import { CellGroup } from "./CellGroup";
 
 
 export enum GroupType {
@@ -15,7 +15,7 @@ export enum GroupType {
     BlastAll
 }
 
-export class BonusGroup extends TileGroup {
+export class BonusGroup extends CellGroup {
 
     protected type: GroupType;
     get typeGroup(): GroupType { return this.type; };
@@ -25,17 +25,27 @@ export class BonusGroup extends TileGroup {
         this.initType();
     }
 
-    static create(cell: Cell): BonusGroup | undefined {
-        let group = new BonusGroup(cell);
-        if (group.size < 2)
-            return;
-        return group;
+    get canHit(): boolean {
+        return this.size > 0;
+    }
+
+    get canMerge(): boolean {
+        return this.size > 1;
+    }
+
+    protected _burn(cell: Cell) {
+
+    }
+
+    protected _merge(cell: Cell) {
+        cell.pop();
+        // cell.add(BonusType[bonusType])
     }
 
     protected isEqual(src: Tile, target: Tile): boolean {
         if (!src || !target)
             return false;
-        return target.type in BonusType;
+        return target.typeString in BonusType;
     }
 
     protected initType() {
@@ -46,8 +56,10 @@ export class BonusGroup extends TileGroup {
         let countBomb   = 0;
         let countDisco  = 0;
 
-        this.tiles.forEach((tile) => {
-            switch (tile.type) {
+        this.cells.forEach((cell) => {
+            if (cell.isEmpty)
+                return;
+            switch (cell.tile.type) {
                 case BonusType.rocket:  countRocket++; break;
                 case BonusType.bomb:    countBomb++;   break;
                 case BonusType.disco:   countDisco++;  break;

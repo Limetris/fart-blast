@@ -1,9 +1,10 @@
 import {GameFieldData} from "./GameFieldData";
 import {ColumnData, IGameFieldData} from "../entities/EntityGame";
-import {Cell, CellCallback} from "../cell/Cell";
+import {Cell} from "../cell/Cell";
 import {Column} from "./Column";
+import { CellCallback } from "../cell/CellTiles";
 
-export class GameFieldCells extends  GameFieldData{
+export class GameFieldCells extends  GameFieldData {
 
     private _columns: Column[];
 

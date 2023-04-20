@@ -12,7 +12,7 @@ export class BlockIcon extends Icon {
     type: BlockType;
 
     start() {
-
+        super.start();
     }
 
     update(deltaTime: number) {

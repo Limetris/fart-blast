@@ -1,21 +1,21 @@
 import { Cell } from "../cell/Cell";
 import { BonusType, ColorType } from "../entities/EntityTile";
-import { TileGroup } from "./TileGroup";
+import { CellGroup } from "./CellGroup";
 import { BonusGroup } from "./BonusGroup";
 
 
 export class Group {
 
-    static create(cell: Cell): TileGroup | undefined {
+    static create(cell: Cell): CellGroup | undefined {
         if(cell.isHole || cell.isEmpty)
             return;
 
-        let group: TileGroup;
-        if(cell.tile.type in BonusType) {
+        let group: CellGroup;
+        if(cell.tile.typeString in BonusType) {
             group = new BonusGroup(cell);
         }
-        else if (cell.tile.type in ColorType) {
-            group = new TileGroup(cell);
+        else if (cell.tile.typeString in ColorType) {
+            group = new CellGroup(cell);
         }
         if (group && group.size > 1)
             return group;

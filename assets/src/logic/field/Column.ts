@@ -1,7 +1,8 @@
 import {ColumnData} from "../entities/EntityGame";
-import {Cell, CellCallback} from "../cell/Cell";
+import {Cell} from "../cell/Cell";
 import {CellType, CellDataAsUnion} from "../entities/EntityCell";
 import {GameFieldCells} from "./GameFieldCells";
+import {CellCallback} from "../cell/CellTiles";
 
 export class Column {
     readonly gameField: GameFieldCells;

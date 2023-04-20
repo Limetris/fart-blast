@@ -5,7 +5,7 @@ const { ccclass, property } = _decorator;
 @ccclass('BombIcon')
 export class BombIcon extends BonusIcon {
     start() {
-
+        super.start();
     }
 
     update(deltaTime: number) {

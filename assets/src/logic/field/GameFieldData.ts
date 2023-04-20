@@ -1,12 +1,14 @@
 import {IGameFieldData} from "../entities/EntityGame";
 import { assert } from "chai";
+import { GameFieldFSM } from "./GameFieldFSM";
 
-export class GameFieldData {
+export class GameFieldData extends GameFieldFSM {
     readonly columnCount: number;
     readonly rowCount: number;
     readonly gameData: IGameFieldData;
 
     constructor(gameData: IGameFieldData) {
+        super();
         GameFieldData.validate(gameData);
 
         this.gameData = gameData;

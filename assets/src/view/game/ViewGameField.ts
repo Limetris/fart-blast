@@ -3,7 +3,14 @@ import {IGameFieldData} from "../../logic/entities/EntityGame";
 import {GameFieldLogic} from "../../logic/field/GameFieldLogic";
 import {Cell} from "../../logic/cell/Cell";
 import { GameFieldBack } from './GameFieldBack';
-import { ViewCell } from '../cell/ViewCell';
+import {ViewCell, ViewCellEvent} from '../cell/ViewCell';
+import EventManager from "../../logic/EventManager";
+import {GFStateClick} from "../../logic/field/states/GFStateClick";
+import {GFStateHit} from "../../logic/field/states/GFStateHit";
+import {Tile} from "../../logic/tiles/Tile";
+import {GFStateIdle} from "../../logic/field/states/GFStateIdle";
+import {GFStateGroups} from "../../logic/field/states/GFStateGroups";
+import {Icon} from "../tiles/Icon";
 const { ccclass, property } = _decorator;
 
 @ccclass('ViewGameField')
@@ -33,6 +40,12 @@ export class ViewGameField extends Component {
     onLoad() {
         this._offset = this._getOffset();
         this._createTiles();
+        this._initListeners();
+        this._onStateGroups();
+    }
+
+    onDestroy() {
+        EventManager.unsubscribeTag(this);
     }
 
     private _getOffset(): Vec2 {
@@ -66,6 +79,46 @@ export class ViewGameField extends Component {
     private _cellInitPosition (node: Node, x: number, y: number) {
         node.setPosition(x * this.cellSize.width + this._offset.x, - y * this.cellSize.height + this._offset.y);
     }
+
+
+    private _initListeners() {
+        EventManager.subscribe(ViewCellEvent.click, this._onCellClick.bind(this), this);
+
+        EventManager.subscribe(GFStateGroups.ID, this._onStateGroups.bind(this), this);
+        EventManager.subscribe(GFStateIdle.ID, this._onStateIdle.bind(this), this);
+        EventManager.subscribe(GFStateClick.ID, this._onStateClick.bind(this), this);
+        EventManager.subscribe(GFStateHit.ID, this._onStateHit.bind(this), this);
+    }
+
+    private _onStateGroups() {
+        this.cells.children.forEach((node) => {
+            let viewCell = node.getComponent(ViewCell);
+            if(!viewCell.cell?.group?.canHit) {
+                node.children.forEach((iconNode) => {
+                    let icon = iconNode.getComponent(Icon);
+                    icon.alpha(0.2);
+                });
+            }
+        });
+    }
+
+    private _onStateIdle() {
+
+    }
+
+
+    private _onCellClick(viewCell: ViewCell) {
+        this._gameField.click(viewCell.cell);
+    }
+
+    private _onStateClick() {
+
+    }
+
+    private _onStateHit(tiles: Tile[]) {
+
+    }
+
 
 }
 

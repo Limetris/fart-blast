@@ -12,7 +12,7 @@ export class ColorIcon extends Icon {
     type: ColorType;
 
     start() {
-
+        super.start();
     }
 
     update(deltaTime: number) {

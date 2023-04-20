@@ -57,6 +57,7 @@ export class IconFactory extends Component {
         if (!node)
             return;
         let icon = node.getComponent(Icon);
+        icon.tile = tile;
         return icon;
     }
 
