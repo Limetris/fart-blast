@@ -9,6 +9,9 @@ const { ccclass, property, requireComponent } = _decorator;
 @requireComponent(Sprite)
 export class Icon extends IconBase {
 
+    static DROP_SPEED = 1300;
+    static DROP_DELAY = 0.015;
+
     viewGameFiled: ViewGameField;
     protected sprite: Sprite;
 
@@ -48,24 +51,26 @@ export class Icon extends IconBase {
     }
 
     async drop(delay: number = 0): Promise<Icon> {
-
+        if (this.node.position.y === 0)
+            return this;
+        let tweenDuration: number = this.node.position.y / Icon.DROP_SPEED;
+        if(tweenDuration <= 0) {
+            this.node.position = Vec3.ZERO;
+            return this;
+        }
         return new Promise(resolve => {
-            // let tweenDuration: number = this.node.position.y / 100;    // Duration of the tween
-            let tweenDuration: number = 0.2;    // Duration of the tween
             tween(this.node)
                 .delay(delay)
-                .to(tweenDuration, { position: Vec3.ZERO }, {  //
-                    // easing: "bounceOut",                                   // Tween function
-                    easing: "sineIn",                                   // Tween function
-                    onComplete: (target?: object) => {                  // Start the tween
+                .to(tweenDuration, { position: Vec3.ZERO }, {
+                    // easing: "bounceOut",
+                    easing: "sineIn",
+                    onComplete: (target?: object) => {
                         this.node.position = Vec3.ZERO;
                         resolve(this);
                     }
                 })
                 .start();
         });
-
-
     }
 
     onClick() {

@@ -7,10 +7,12 @@ import {GFStateClick} from "./states/GFStateClick";
 import {GFStateIdle} from "./states/GFStateIdle";
 import {Events} from "../Events";
 import {GFStateGroups} from "./states/GFStateGroups";
+import {Tile} from "../tiles/Tile";
 
 export class GameFieldLogic extends GameFieldCells {
 
     private _groups: CellGroup[];
+    sequenceHitTiles: Tile[] = [];
     get groups(): CellGroup[] { return this._groups;  }
 
     constructor(gameFieldData: IGameFieldData) {

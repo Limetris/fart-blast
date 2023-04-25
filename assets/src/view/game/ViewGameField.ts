@@ -13,9 +13,9 @@ import {GFStateGroups} from "../../logic/field/states/GFStateGroups";
 import {Icon} from "../tiles/Icon";
 import {GFStateDrop} from "../../logic/field/states/GFStateDrop";
 import {CellTiles} from "../../logic/cell/CellTiles";
-import {GFStateFill} from "../../logic/field/states/GFStateFill";
 import {GFStateMerge} from "../../logic/field/states/GFStateMerge";
 import {Column, ColumnEvent} from "../../logic/field/Column";
+import {GFStateSequenceHit} from "../../logic/field/states/GFStateSequenceHit";
 const { ccclass, property } = _decorator;
 
 
@@ -128,7 +128,6 @@ export class ViewGameField extends Component {
         EventManager.subscribe(GFStateHit.ID, this._onStateHit.bind(this), this);
         EventManager.subscribe(GFStateMerge.ID, this._onStateMerge.bind(this), this);
         EventManager.subscribe(GFStateDrop.ID, this._onStateDrop.bind(this), this);
-        EventManager.subscribe(GFStateFill.ID, this._onStateFill.bind(this), this);
     }
 
     private _getStartColumnWorldCoordinate(x: number): Vec2 | undefined {
@@ -186,29 +185,26 @@ export class ViewGameField extends Component {
     }
 
     private _onStateDrop() {
-        log(this._gameField.getMatrixIds());
         let promises = [];
 
-
         this._cells.forEach((viewColumn)=> {
+
             let delay = 0;
             for(let y = viewColumn.length - 1; y >= 0; y--) {
                 let viewCell = viewColumn[y];
-                if(!viewCell.cell.isHole)
+                if(viewCell.cell.isHole)
+                    delay += this.cellSize.height / Icon.DROP_SPEED;
+                else
                     promises.push(viewCell.drop(delay));
-                delay += 0.01;
+
+                delay += Icon.DROP_DELAY;
             }
         });
 
-
+        log('wait drop aninmate');
         Promise.all(promises).then(()=> {
             this._gameField.state.next();
         } );
-    }
-
-    private _onStateFill() {
-        log(this._gameField.getMatrixIds());
-        this._gameField.state.next();
     }
 
 

@@ -54,11 +54,11 @@ export class CellGroup {
         this._removeTiles();
     }
 
-    merge(cell: Cell): Tile {
+    merge(cell: Cell): Tile[] {
         return this._merge(cell);
     }
 
-    protected _merge(cell: Cell): Tile {
+    protected _merge(cell: Cell): Tile[] {
         let bonusType = this._getNewTypeTile();
 
         const tileOrigin = cell.tile as TileColor;
@@ -69,10 +69,10 @@ export class CellGroup {
             let tileDisco = tile as TileDisco;
             tileDisco.color = tileOrigin.type as ColorType;
         }
-        return tile;
+        return [tile];
     }
 
-    protected _getNewTypeTile(): BonusType {
+    private _getNewTypeTile(): BonusType {
         if(this.size > 8 )
             return BonusType.disco;
         else if (this.size > 6)
@@ -81,7 +81,7 @@ export class CellGroup {
             return BonusType.rocket;
     }
 
-    private _removeTiles(): Tile[] {
+    protected _removeTiles(): Tile[] {
         let tiles: Tile[] = [];
         this.cells.forEach((cell) => {
             tiles.push(cell.pop());
@@ -129,11 +129,4 @@ export class CellGroup {
             return false;
         return src.typeString === target.typeString;
     }
-
-    // protected initType() {
-    //     if(this.size === 0)
-    //         return;
-    //     const tile = this.cellsNode.values().next().value as Tile;
-    //     this.type = tile.type;
-    // }
 }

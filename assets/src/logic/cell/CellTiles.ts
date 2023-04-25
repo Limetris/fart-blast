@@ -10,6 +10,7 @@ export type CellCallback = (cell: CellTiles) => void;
 export enum CellTilesEvent {
     insert,
     create,
+    replace,
     pop
 
 }
@@ -44,6 +45,16 @@ export class CellTiles extends CellBase {
         return tile;
     }
 
+    replace (obj: CellDataAsUnion): Tile {
+        this.clear();
+        if(this.isHole)
+            return;
+        let tile: Tile = TileFactory.create(obj);
+        this._push(tile);
+        this.dispatch(CellTilesEvent.replace, tile);
+        return tile;
+    }
+
     insert (tile: Tile): Tile {
         if(this.isHole)
             return;
@@ -63,6 +74,13 @@ export class CellTiles extends CellBase {
         let tile = this._tiles.pop();
         this._tileReset(tile);
         return tile;
+    }
+
+    clear(): Tile[] {
+        let tiles: Tile[] = [];
+        while(!this.isEmpty)
+            tiles.push(this.pop());
+        return tiles;
     }
 
     remove(tile: Tile) {

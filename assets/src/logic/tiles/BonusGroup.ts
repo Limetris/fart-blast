@@ -1,28 +1,17 @@
-import {GameFieldLogic} from "../field/GameFieldLogic";
 import {Tile} from "./Tile";
-import { Cell } from "../cell/Cell";
-import {GameFieldCells} from "../field/GameFieldCells";
-import {BonusType, TileType} from "../entities/EntityTile";
-import { CellGroup } from "./CellGroup";
-
-
-export enum GroupType {
-    RocketCross,
-    RocketCross3,
-    BigBlast,
-    GenerateRockets,
-    GenerateBombs,
-    BlastAll
-}
+import {Cell} from "../cell/Cell";
+import {BonusType, ColorType} from "../entities/EntityTile";
+import {CellGroup} from "./CellGroup";
+import {CellDataAsUnion} from "../entities/EntityCell";
+import {TileDisco} from "./bonus/TileDisco";
+import {RocketDirection, TileRocket} from "./bonus/TileRocket";
+import {TileBomb} from "./bonus/TileBomb";
 
 export class BonusGroup extends CellGroup {
 
-    protected type: GroupType;
-    get typeGroup(): GroupType { return this.type; };
 
     constructor(cell: Cell) {
         super(cell);
-        this.initType();
     }
 
     get canHit(): boolean {
@@ -34,12 +23,11 @@ export class BonusGroup extends CellGroup {
     }
 
     protected _burn(cell: Cell) {
-
+        this._removeTiles();
     }
 
-    protected _merge(cell: Cell) {
-        cell.pop();
-        // cell.insert(BonusType[bonusType])
+    protected _merge(cell: Cell): Tile[] {
+        return this._generateTiles(cell, this._removeTiles());
     }
 
     protected isEqual(src: Tile, target: Tile): boolean {
@@ -48,40 +36,72 @@ export class BonusGroup extends CellGroup {
         return target.typeString in BonusType;
     }
 
-    protected initType() {
+    protected _generateTiles(cell: Cell, tiles: Tile[]): Tile[] {
         if(this.size === 0)
-            return;
+            return [];
 
         let countRocket = 0;
         let countBomb   = 0;
         let countDisco  = 0;
+        let color: ColorType;
 
-        this.cells.forEach((cell) => {
-            if (cell.isEmpty)
-                return;
-            switch (cell.tile.type) {
+        tiles.forEach((tile) => {
+            switch (tile.type) {
                 case BonusType.rocket:  countRocket++; break;
                 case BonusType.bomb:    countBomb++;   break;
-                case BonusType.disco:   countDisco++;  break;
+                case BonusType.disco:
+                    color = (tile as TileDisco).color;
+                    countDisco++;
+                break;
             }
         });
 
         if (countDisco > 1)
-            this.type = GroupType.BlastAll;
+            return [this._generateBlastAll(cell)];
 
         else if (countDisco > 0 && countBomb > 0)
-            this.type = GroupType.GenerateBombs;
+            return this._generateTile(cell, color, BonusType.bomb);
 
         else if (countDisco > 0 && countRocket > 0)
-            this.type = GroupType.GenerateRockets;
+            return this._generateTile(cell, color, BonusType.rocket);
 
         else if (countBomb > 1)
-            this.type = GroupType.BigBlast;
+            return [this._generateBigBlast(cell)];
 
         else if (countBomb > 0 && countRocket > 0)
-            this.type = GroupType.RocketCross3;
+            return [this._generateRocketCross(cell, 1)];
 
         else if (countRocket > 1)
-            this.type = GroupType.RocketCross;
+            return [this._generateRocketCross(cell)];
+        return [];
+    }
+
+    private _generateRocketCross(cell: Cell, radius: number = 0): Tile {
+        let tile = cell.create(BonusType[BonusType.rocket] as CellDataAsUnion) as TileRocket;
+        tile.radius = radius;
+        tile.direction = RocketDirection.cross;
+        return tile;
+    }
+
+    private _generateBigBlast(cell: Cell, radius: number = 2): Tile {
+        let tile = cell.create(BonusType[BonusType.bomb] as CellDataAsUnion) as TileBomb;
+        tile.radius = radius;
+        return tile;
+    }
+
+    private _generateTile(cell: Cell, color: ColorType, tileType: BonusType): Tile[] {
+        let tiles: Tile[] = [];
+        const colorType = ColorType[color];
+        this.gameField.eachCell((cell: Cell) => {
+            if (cell.tile?.typeString === colorType) {
+                let tile = cell.replace(BonusType[tileType] as CellDataAsUnion);
+                tiles.push(tile);
+            }
+        });
+        return tiles;
+    }
+
+    private _generateBlastAll(cell: Cell): Tile {
+        return this._generateBigBlast(cell, Math.max(this.gameField.columnCount, this.gameField.rowCount));
     }
 }

@@ -2,7 +2,7 @@ import {GFState} from "./GFState";
 import { Cell } from "../../cell/Cell";
 import {GFStateIdle} from "./GFStateIdle";
 import EventManager from "../../EventManager";
-import {GFStateFill} from "./GFStateFill";
+import {GFStateSequenceHit} from "./GFStateSequenceHit";
 
 export class GFStateDrop extends GFState {
     static ID = GFStateDrop.name;
@@ -14,7 +14,7 @@ export class GFStateDrop extends GFState {
     }
 
     next() {
-        this.context.toState(GFStateFill);
+        this.context.toState(GFStateSequenceHit);
     }
 
     onExit() {

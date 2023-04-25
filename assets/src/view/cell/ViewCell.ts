@@ -40,6 +40,7 @@ export class ViewCell extends Component {
         this.node.on(Node.EventType.TOUCH_END, this.onClick, this);
         this.cell.subscribe(CellTilesEvent.create, this.onCreateTile.bind(this), this);
         this.cell.subscribe(CellTilesEvent.insert, this.onAddTile.bind(this), this);
+        this.cell.subscribe(CellTilesEvent.replace, this.onReplaceTile.bind(this), this);
     }
 
     onDestroy() {
@@ -53,6 +54,11 @@ export class ViewCell extends Component {
 
     onAddTile(tile: Tile) {
 
+    }
+
+    onReplaceTile(tile: Tile) {
+        this.node.removeAllChildren();
+        this._createIcon(tile);
     }
 
     onClick(event) {
@@ -77,7 +83,7 @@ export class ViewCell extends Component {
         });
 
         return new Promise(resolve => {
-            Promise.all(promises).then(()=> {resolve(this)} );
+            Promise.all(promises).then(()=> { resolve(this) } );
         });
     }
 

@@ -31,4 +31,35 @@ export class Cell extends CellTiles {
         this._group = undefined;
     }
 
+    create(obj: CellDataAsUnion): Tile {
+        this.resetGroup();
+        return super.create(obj);
+    }
+
+    insert(tile: Tile): Tile {
+        this.resetGroup();
+        return super.insert(tile);
+    }
+
+    replace(obj: CellDataAsUnion): Tile {
+        this.resetGroup();
+        return super.replace(obj);
+    }
+
+    fill(): Tile | undefined {
+        this.resetGroup();
+        return super.fill();
+    }
+
+    pop(): Tile {
+        this.resetGroup();
+        return super.pop();
+    }
+
+    clear(): Tile[] {
+        this.resetGroup();
+        return super.clear();
+    }
+
+
 }

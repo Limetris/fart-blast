@@ -11,7 +11,11 @@ export class GFStateHit extends GFState {
     hitTiles: Tile[] = [];
 
     onEnter(cell: Cell) {
-        this.hitTiles = cell.group.hit(cell);
+        if (cell.group)
+            this.hitTiles = cell.group.hit(cell);
+        else if(cell.canHit)
+            this.hitTiles = cell.hit();
+
         console.log(this.hitTiles);
         EventManager.dispatch(this.id, this.hitTiles);
     }

@@ -4,21 +4,24 @@ import {GFStateIdle} from "./GFStateIdle";
 import EventManager from "../../EventManager";
 import {GFStateDrop} from "./GFStateDrop";
 import {Tile} from "../../tiles/Tile";
-import {CellGroup} from "../../tiles/CellGroup";
-import {BonusType} from "../../entities/EntityTile";
-import {CellDataAsUnion} from "../../entities/EntityCell";
+import {BonusGroup} from "../../tiles/BonusGroup";
+import {GFStateSequenceHit} from "./GFStateSequenceHit";
 
 export class GFStateMerge extends GFState {
     static ID = GFStateMerge.name;
 
     tiles: Tile[] = [];
     cell: Cell;
-    newTile: Tile;
+    newTiles: Tile[] = [];
+
+    isBonusGroup: boolean = false;
 
     onEnter(cell: Cell) {
         this.cell = cell;
         this.tiles = cell.group.tiles;
-        this.newTile = cell.group.merge(cell);
+        this.isBonusGroup = (this.cell.group instanceof BonusGroup);
+        this.newTiles = cell.group.merge(cell);
+
         EventManager.dispatch(this.id, this.tiles);
     }
 
@@ -27,7 +30,12 @@ export class GFStateMerge extends GFState {
             tile.destroy();
         });
 
-        this.context.toState(GFStateDrop);
+        if (this.isBonusGroup) {
+            this.context.sequenceHitTiles = this.newTiles;
+            this.context.toState(GFStateSequenceHit);
+        }
+        else
+            this.context.toState(GFStateDrop);
     }
 
     onExit() {
