@@ -2,10 +2,12 @@ import {GameFieldLogic} from "../field/GameFieldLogic";
 import {Tile} from "./Tile";
 import { Cell } from "../cell/Cell";
 import {GameFieldCells} from "../field/GameFieldCells";
-import {BonusType, TileType} from "../entities/EntityTile";
+import {BonusType, ColorType, TileType} from "../entities/EntityTile";
 import {CellTiles} from "../cell/CellTiles";
 import {CellDataAsUnion} from "../entities/EntityCell";
 import TileFactory from "../TileFactory";
+import {TileDisco} from "./bonus/TileDisco";
+import {TileColor} from "./TileColor";
 
 export class CellGroup {
 
@@ -57,16 +59,26 @@ export class CellGroup {
     }
 
     protected _merge(cell: Cell): Tile {
-        let bonusType: BonusType;
-        if(this.size > 8 )
-            bonusType = BonusType.disco;
-        else if (this.size > 6)
-            bonusType = BonusType.bomb;
-        else if (this.size > 4)
-            bonusType = BonusType.rocket;
+        let bonusType = this._getNewTypeTile();
 
+        const tileOrigin = cell.tile as TileColor;
         this._removeTiles();
-        return cell.create(BonusType[bonusType] as CellDataAsUnion);
+        let tile = cell.create(BonusType[bonusType] as CellDataAsUnion);
+
+        if (tile.typeString === BonusType[BonusType.disco]) {
+            let tileDisco = tile as TileDisco;
+            tileDisco.color = tileOrigin.type as ColorType;
+        }
+        return tile;
+    }
+
+    protected _getNewTypeTile(): BonusType {
+        if(this.size > 8 )
+            return BonusType.disco;
+        else if (this.size > 6)
+            return BonusType.bomb;
+        else if (this.size > 4)
+            return BonusType.rocket;
     }
 
     private _removeTiles(): Tile[] {
