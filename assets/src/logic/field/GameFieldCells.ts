@@ -26,11 +26,18 @@ export class GameFieldCells extends  GameFieldData {
         return this._columns[columnIndex];
     }
 
+
     eachCell(callback: CellCallback) {
         if(!callback)
             return;
         this._columns.forEach((column, x) => {
             column.eachCell(callback);
+        });
+    }
+
+    drop() {
+        this._columns.forEach((column, x) => {
+            column.drop();
         });
     }
 
@@ -53,6 +60,17 @@ export class GameFieldCells extends  GameFieldData {
         return new Column(this, x, columnData);
     }
 
+    getMatrixIds() {
+        let matrix = [];
+        for(let y = 0; y < this.rowCount; y++) {
+            let row = [];
+            for (let x = 0; x < this.columnCount; x++) {
+                row.push(this.getCell(x, y).toString());
+            }
+            matrix.push(row);
+        }
+        return matrix;
+    }
 
 }
 

@@ -16,9 +16,10 @@ export class GFStateHit extends GFState {
         EventManager.dispatch(this.id, this.hitTiles);
     }
 
-    activate(cell: Cell) {
-
-
+    next(cell: Cell) {
+        this.hitTiles.forEach(tile => {
+           tile.destroy();
+        });
         this.context.toState(GFStateDrop.ID);
     }
 

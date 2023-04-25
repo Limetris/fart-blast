@@ -1,19 +1,22 @@
-import { _decorator, Component, Node, Sprite, Color, log } from 'cc';
+import { _decorator, Component, Node, Sprite, Color, log, tween, Vec3 } from 'cc';
 import {IconBase} from "./IconBase";
 import { Cell } from '../../logic/cell/Cell';
 import {Tile, TileEvent} from '../../logic/tiles/Tile';
+import {ViewGameField} from "../game/ViewGameField";
 const { ccclass, property, requireComponent } = _decorator;
 
 @ccclass('Icon')
 @requireComponent(Sprite)
 export class Icon extends IconBase {
 
-    private _sprite: Sprite;
+    viewGameFiled: ViewGameField;
+    protected sprite: Sprite;
 
     onLoad() {
-        this._sprite = this.getComponent(Sprite);
+        this.sprite = this.getComponent(Sprite);
         this.tile.subscribe(TileEvent.hit, this.onTileHit.bind(this), this);
         this.tile.subscribe(TileEvent.destroy, this.onTileDestroy.bind(this), this);
+        this.tile.subscribe(TileEvent.changeCell, this.onTileChangeCell.bind(this), this);
     }
 
     onDestroy() {
@@ -21,17 +24,51 @@ export class Icon extends IconBase {
     }
 
     alpha(alpha: number) {
-        if(!this._sprite)
+        if(!this.sprite)
             return;
-        let color = this._sprite.color;
-        this._sprite.color = new Color(color.r, color.g, color.b, 255 * alpha);
+        let color = this.sprite.color;
+        this.sprite.color = new Color(color.r, color.g, color.b, 255 * alpha);
     }
 
-    onTileHit(tile: Tile, cell: Cell) {
-        log(this.tile);
+    onTileHit() {
+        // log(this.tile);
     }
 
-    onTileDestroy(tile: Tile, cell: Cell) {
+    onTileDestroy() {
+        this.node.removeFromParent();
+    }
+
+    onTileChangeCell(tile: Tile, cellPrev: Cell, cellNew: Cell) {
+        let viewCell = this.viewGameFiled.getCell(cellNew.x, cellNew.y);
+        if (viewCell) {
+            const wordPos = this.node.getWorldPosition();
+            this.node.setParent(viewCell.node);
+            this.node.worldPosition = wordPos;
+        }
+    }
+
+    async drop(delay: number = 0): Promise<Icon> {
+
+        return new Promise(resolve => {
+            // let tweenDuration: number = this.node.position.y / 100;    // Duration of the tween
+            let tweenDuration: number = 0.15;    // Duration of the tween
+            tween(this.node)
+                .delay(delay)
+                .to(tweenDuration, { position: Vec3.ZERO }, {  //
+                    // easing: "bounceOut",                                   // Tween function
+                    easing: "sineIn",                                   // Tween function
+                    onComplete: (target?: object) => {                  // Start the tween
+                        this.node.position = Vec3.ZERO;
+                        resolve(this);
+                    }
+                })
+                .start();
+        });
+
+
+    }
+
+    onClick() {
 
     }
 

@@ -39,7 +39,7 @@ export class BonusGroup extends CellGroup {
 
     protected _merge(cell: Cell) {
         cell.pop();
-        // cell.add(BonusType[bonusType])
+        // cell.insert(BonusType[bonusType])
     }
 
     protected isEqual(src: Tile, target: Tile): boolean {

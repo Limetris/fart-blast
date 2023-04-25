@@ -10,4 +10,5 @@ export class TileColor extends  Tile {
 
     get typeString(): CellDataAsUnion { return ColorType[this.type] as CellDataAsUnion };
 
+
 }

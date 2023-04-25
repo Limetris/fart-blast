@@ -5,6 +5,7 @@ import {GameFieldCells} from "../field/GameFieldCells";
 import {BonusType, TileType} from "../entities/EntityTile";
 import {CellTiles} from "../cell/CellTiles";
 import {CellDataAsUnion} from "../entities/EntityCell";
+import TileFactory from "../TileFactory";
 
 export class CellGroup {
 
@@ -31,6 +32,12 @@ export class CellGroup {
         return this.size > 4;
     }
 
+    get tiles(): Tile[] {
+        let tiles: Tile[] = [];
+        this.cells.forEach(cell=>  tiles.push(cell.tile));
+        return tiles;
+    }
+
     hit(cell: Cell): Tile[] {
         let tiles: Tile[] = [];
         this.cells.forEach((cell) => {
@@ -45,31 +52,29 @@ export class CellGroup {
         this._removeTiles();
     }
 
-    merge(cell: Cell) {
-        this._merge(cell);
+    merge(cell: Cell): Tile {
+        return this._merge(cell);
     }
 
-    protected _merge(cell: Cell) {
+    protected _merge(cell: Cell): Tile {
         let bonusType: BonusType;
-        if(this.size > 8 ) {
+        if(this.size > 8 )
             bonusType = BonusType.disco;
-        }
-        else if (this.size > 6) {
+        else if (this.size > 6)
             bonusType = BonusType.bomb;
-        }
-        else if (this.size > 4) {
+        else if (this.size > 4)
             bonusType = BonusType.rocket;
-        }
 
         this._removeTiles();
-        cell.add(BonusType[bonusType] as CellDataAsUnion);
+        return cell.create(BonusType[bonusType] as CellDataAsUnion);
     }
 
-
-    private _removeTiles() {
+    private _removeTiles(): Tile[] {
+        let tiles: Tile[] = [];
         this.cells.forEach((cell) => {
-            cell.pop();
-        })
+            tiles.push(cell.pop());
+        });
+        return tiles;
     }
 
     private _searchTiles(cell: Cell) {
@@ -116,7 +121,7 @@ export class CellGroup {
     // protected initType() {
     //     if(this.size === 0)
     //         return;
-    //     const tile = this.cells.values().next().value as Tile;
+    //     const tile = this.cellsNode.values().next().value as Tile;
     //     this.type = tile.type;
     // }
 }

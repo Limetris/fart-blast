@@ -4,7 +4,7 @@ import {IGameFieldData} from "../assets/src/logic/entities/EntityGame";
 import {assert} from 'chai';
 import {y, r, p, b, e, g, _, B, D, O, R, X} from './short_id'
 import {GFStateIdle} from "../assets/src/logic/field/states/GFStateIdle";
-import {GFStateClick} from "db://assets/src/logic/field/states/GFStateClick";
+import {GFStateClick} from "../assets/src/logic/field/states/GFStateClick";
 import {Cell} from "../assets/src/logic/cell/Cell";
 
 @suite class GameFieldLogicTest {

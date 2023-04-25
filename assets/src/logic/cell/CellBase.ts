@@ -1,7 +1,8 @@
 import {CellType, ICellData} from "../entities/EntityCell";
 import {GameFieldCells} from "../field/GameFieldCells";
+import {Events} from "../Events";
 
-export class CellBase implements ICellData {
+export class CellBase extends Events implements ICellData {
 
     gameField: GameFieldCells;
 
@@ -10,6 +11,7 @@ export class CellBase implements ICellData {
     readonly y: number;
 
     constructor(x: number, y: number, type: CellType = CellType.cell) {
+        super();
         this.x = x;
         this.y = y;
         this.type = type;

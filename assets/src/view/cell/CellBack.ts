@@ -36,7 +36,7 @@ export class CellBack extends Component {
         return index;
     }
 
-    // order index cells
+    // order index cellsNode
     // [ 0, 1 ]
     // [ 2, 3 ]
     private _getIndex(cellLeftTop: Cell, cellRightTop: Cell, cellLeftBottom: Cell, cellRightBottom: Cell): number {

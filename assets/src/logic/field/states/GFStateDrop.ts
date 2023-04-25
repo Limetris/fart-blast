@@ -2,28 +2,19 @@ import {GFState} from "./GFState";
 import { Cell } from "../../cell/Cell";
 import {GFStateIdle} from "./GFStateIdle";
 import EventManager from "../../EventManager";
+import {GFStateFill} from "./GFStateFill";
 
 export class GFStateDrop extends GFState {
     static ID = GFStateDrop.name;
 
-    onEnter(cell: Cell) {
-        if (cell.canHit) {
-            if (cell.group) {
-                cell.group.hit(cell);
-                this.context.toState(GFStateIdle.ID);
-            }
-            else if (cell.tile.isBonus){
-                cell.tile.hit();
-            }
-        }
-        else {
-            this.context.toState(GFStateIdle.ID);
-        }
+    onEnter() {
+        this.context.drop();
+        this.context.fill();
         EventManager.dispatch(this.id);
     }
 
-    activate() {
-
+    next() {
+        this.context.toState(GFStateFill);
     }
 
     onExit() {

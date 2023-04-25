@@ -18,7 +18,10 @@ export class Cell extends CellTiles {
     }
 
     hit(): Tile[] {
-        return this.tile?.hit();
+        let tiles = this.tile?.hit();
+        if (!this.tile.isAlive)
+            this.pop();
+        return tiles;
     }
 
     setGroup(group: CellGroup) {

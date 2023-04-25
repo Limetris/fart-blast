@@ -1,9 +1,18 @@
 import {CellDataAsUnion, CellType, ICellData} from "../entities/EntityCell";
 import {CellBase} from "./CellBase";
-import {Tile} from "../tiles/Tile";
+import {Tile, TileEvent} from "../tiles/Tile";
 import TileFactory from "../TileFactory";
+import {Cell} from "./Cell";
+import {TileTypeToShort} from "../entities/EntityTile";
 
 export type CellCallback = (cell: CellTiles) => void;
+
+export enum CellTilesEvent {
+    insert,
+    create,
+    pop
+
+}
 
 export class CellTiles extends CellBase {
 
@@ -25,40 +34,68 @@ export class CellTiles extends CellBase {
         return this._tiles[this._tiles.length - 1];
     }
 
-    add (obj: Tile | CellDataAsUnion): Tile {
+
+    create (obj: CellDataAsUnion): Tile {
         if(this.isHole)
             return;
-
-        let tile: Tile = (obj instanceof Tile) ? obj : TileFactory.create(obj);
+        let tile: Tile = TileFactory.create(obj);
         this._push(tile);
+        this.dispatch(CellTilesEvent.create, tile);
         return tile;
     }
 
+    insert (tile: Tile): Tile {
+        if(this.isHole)
+            return;
+        this._push(tile);
+        this.dispatch(CellTilesEvent.insert, tile);
+        return tile;
+    }
+
+    fill (): Tile | undefined {
+        if (this.isHole || !this.isEmpty)
+            return;
+        return this.create(TileFactory.randomType);
+    }
+
+
     pop(): Tile {
         let tile = this._tiles.pop();
-        tile.destroy();
+        this._tileReset(tile);
         return tile;
+    }
+
+    remove(tile: Tile) {
+        const index = this._tiles.indexOf(tile);
+        if (index > -1)
+            this._tiles.splice(index, 1);
+        this._tileReset(tile);
+    }
+
+    private _tileReset(tile: Tile) {
+        tile.unsubscribeTag(this);
+        tile.resetCell();
     }
 
     private _push(tile: Tile) {
         if (!tile)
             return;
         this._tiles.push(tile);
+
+        tile.subscribe(TileEvent.destroy, this.onTileDestroy.bind(this), this);
+
+        tile.setGameField(this.gameField);
         tile.setCell(this);
     }
 
 
-    getTile(layerIndex: number): Tile {
-        return this._tiles[layerIndex];
+
+    onTileDestroy(tile: Tile) {
+        this.remove(tile);
     }
 
-    fill (): Tile {
-        if (this.isHole || !this.isEmpty)
-            return this.tile;
-
-        let tile = TileFactory.random;
-        this.add(tile);
-        return tile;
+    getTile(layerIndex: number): Tile {
+        return this._tiles[layerIndex];
     }
 
     eachAround(callback: CellCallback) {
@@ -89,4 +126,12 @@ export class CellTiles extends CellBase {
             callback(cell);
     }
 
+    toString() {
+        if(this.isHole)
+            return '_';
+        if(this.isEmpty)
+            return 'e';
+
+        return TileTypeToShort[this.tile.typeString];
+    }
 }

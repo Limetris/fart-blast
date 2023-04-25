@@ -10,15 +10,17 @@ export class GFStateClick extends GFState {
 
     onEnter(cell: Cell) {
         EventManager.dispatch(this.id);
-        this.activate(cell);
+        this.next(cell);
     }
 
-    activate(cell: Cell) {
+    next(cell: Cell) {
         if (cell.canHit && cell.group) {
             if(cell.group.canMerge)
                 this.context.toState(GFStateMerge, cell);
             else if (cell.group.canHit)
                 this.context.toState(GFStateHit, cell);
+            else
+                this.context.toState(GFStateIdle);
         }
         else {
             this.context.toState(GFStateIdle);

@@ -7,11 +7,11 @@ export class GFStateGroups extends GFState {
 
     onEnter() {
         this.context.searchGroups();
-        this.context.toState(GFStateIdle);
         EventManager.dispatch(this.id);
+        this.context.toState(GFStateIdle);
     }
 
-    activate() {
+    next() {
 
     }
 

@@ -37,10 +37,14 @@ class TileFactory {
         return new TileColor(colorType);
     }
 
-    get random(): Tile {
-        const colorIndex = Math.floor(Math.random() * COLORS.length);
-        return this.create(<CellDataAsUnion> COLORS[colorIndex]);
+    get randomTile(): Tile {
+        return this.create(this.randomType);
 
+    }
+
+    get randomType(): CellDataAsUnion {
+        const colorIndex = Math.floor(Math.random() * COLORS.length);
+        return COLORS[colorIndex] as CellDataAsUnion;
     }
 }
 

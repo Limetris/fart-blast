@@ -8,7 +8,7 @@ export class GFStateIdle extends GFState {
         EventManager.dispatch(this.id);
     }
 
-    activate() {
+    next() {
 
     }
 

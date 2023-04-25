@@ -3,6 +3,6 @@ export abstract class StateBase {
     abstract context: any;
 
     abstract onEnter    (...args: any[]): any;
-    abstract activate   (...args: any[]): any;
+    abstract next       (...args: any[]): any;
     abstract onExit     (...args: any[]): any;
 }

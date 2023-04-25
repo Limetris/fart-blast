@@ -13,7 +13,8 @@ export class GFStateCheck extends GFState {
         EventManager.dispatch(this.id);
     }
 
-    activate() {
+    next() {
+
 
         this.context.toState(GFStateDrop.ID);
     }
