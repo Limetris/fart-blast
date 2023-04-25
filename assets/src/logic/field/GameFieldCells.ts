@@ -55,7 +55,6 @@ export class GameFieldCells extends  GameFieldData {
         return [];
     }
 
-
     private _parse () {
         this._columns = [];
 

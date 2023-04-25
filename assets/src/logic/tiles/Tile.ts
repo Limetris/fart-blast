@@ -1,4 +1,4 @@
-import {BonusType, TileType} from "../entities/EntityTile";
+import {BonusType, ColorType, TileType} from "../entities/EntityTile";
 import {TileBase} from "./TileBase";
 import {CellGroup} from "./CellGroup";
 import {CellTiles} from "../cell/CellTiles";
@@ -87,6 +87,10 @@ export class Tile extends  TileBase {
     }
 
     get isBonus(): boolean {
-        return this.type in BonusType;
+        return this.typeString in BonusType;
+    }
+
+    get isColor(): boolean {
+        return this.typeString in ColorType;
     }
 }
