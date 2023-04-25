@@ -3,6 +3,7 @@ import {ColumnData, IGameFieldData} from "../entities/EntityGame";
 import {Cell} from "../cell/Cell";
 import {Column} from "./Column";
 import { CellCallback } from "../cell/CellTiles";
+import {Tile} from "../tiles/Tile";
 
 export class GameFieldCells extends  GameFieldData {
 
@@ -46,6 +47,14 @@ export class GameFieldCells extends  GameFieldData {
             column.fill();
         });
     }
+
+    hitCell(x: number, y: number): Tile[] {
+        let cell = this.getCell(x, y);
+        if(cell?.canHit)
+            return cell.hit();
+        return [];
+    }
+
 
     private _parse () {
         this._columns = [];

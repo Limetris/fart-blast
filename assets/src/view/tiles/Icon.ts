@@ -51,7 +51,7 @@ export class Icon extends IconBase {
 
         return new Promise(resolve => {
             // let tweenDuration: number = this.node.position.y / 100;    // Duration of the tween
-            let tweenDuration: number = 0.15;    // Duration of the tween
+            let tweenDuration: number = 0.2;    // Duration of the tween
             tween(this.node)
                 .delay(delay)
                 .to(tweenDuration, { position: Vec3.ZERO }, {  //

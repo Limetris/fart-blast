@@ -14,13 +14,12 @@ export class Cell extends CellTiles {
     }
 
     get canHit(): boolean {
-        return !this.isHole && !this.isEmpty;
+        return !this.isHole && !this.isEmpty && this.tile.isAlive;
     }
 
     hit(): Tile[] {
         let tiles = this.tile?.hit();
-        if (!this.tile.isAlive)
-            this.pop();
+        this.pop();
         return tiles;
     }
 
