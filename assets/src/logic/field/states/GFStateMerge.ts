@@ -20,12 +20,13 @@ export class GFStateMerge extends GFState {
         this.cell = cell;
         this.tiles = cell.group.tiles;
         this.isBonusGroup = (this.cell.group instanceof BonusGroup);
-        this.newTiles = cell.group.merge(cell);
 
-        EventManager.dispatch(this.id, this.tiles);
+
+        EventManager.dispatch(this.id, this.cell, this.tiles);
     }
 
     next() {
+        this.newTiles = this.cell.group.merge(this.cell);
         this.tiles.forEach(tile => {
             tile.destroy();
         });

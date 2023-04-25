@@ -178,17 +178,23 @@ export class ViewGameField extends Component {
         this._gameField.state.next();
     }
 
-    private _onStateMerge() {
-        log(this._gameField.getMatrixIds());
-        this._gameField.state.next();
-        log(this._gameField.getMatrixIds());
+    private _onStateMerge(cell: Cell, tiles: Tile[]) {
+        let promises = [];
+        let viewCellTarget = this.getCell(cell.x, cell.y);
+        tiles.forEach((tile)=> {
+            let viewCell = this.getCell(tile.x, tile.y);
+            let icon = viewCell.icon;
+            promises.push(icon.flyTo(viewCellTarget.node));
+        });
+        log('wait merging...');
+        Promise.all(promises).then(()=> {
+            this._gameField.state.next();
+        } );
     }
 
     private _onStateDrop() {
         let promises = [];
-
         this._cells.forEach((viewColumn)=> {
-
             let delay = 0;
             for(let y = viewColumn.length - 1; y >= 0; y--) {
                 let viewCell = viewColumn[y];
@@ -200,8 +206,7 @@ export class ViewGameField extends Component {
                 delay += Icon.DROP_DELAY;
             }
         });
-
-        log('wait drop aninmate');
+        log('wait dropping...');
         Promise.all(promises).then(()=> {
             this._gameField.state.next();
         } );

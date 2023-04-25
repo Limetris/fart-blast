@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Sprite, Color, log, tween, Vec3 } from 'cc';
+import { _decorator, Component, Node, Sprite, Color, log, tween, Vec3, UITransform } from 'cc';
 import {IconBase} from "./IconBase";
 import { Cell } from '../../logic/cell/Cell';
 import {Tile, TileEvent} from '../../logic/tiles/Tile';
@@ -66,6 +66,29 @@ export class Icon extends IconBase {
                     easing: "sineIn",
                     onComplete: (target?: object) => {
                         this.node.position = Vec3.ZERO;
+                        resolve(this);
+                    }
+                })
+                .start();
+        });
+    }
+
+    async flyTo(target: Node, delay: number = 0): Promise<Icon> {
+
+        const transformTarget = target.getComponent(UITransform);
+        let targetWorldPos = transformTarget.convertToWorldSpaceAR(Vec3.ZERO);
+
+        const transform = this.node.getComponent(UITransform);
+        let pos = transform.convertToNodeSpaceAR(targetWorldPos);
+
+        let tweenDuration: number = 0.25;
+        return new Promise(resolve => {
+            tween(this.node)
+                .delay(delay)
+                .to(tweenDuration, { position: pos }, {
+                    easing: "backIn",
+                    onComplete: (target?: object) => {
+                        this.node.position = pos;
                         resolve(this);
                     }
                 })
