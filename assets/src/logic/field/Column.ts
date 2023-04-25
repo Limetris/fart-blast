@@ -5,6 +5,7 @@ import {GameFieldCells} from "./GameFieldCells";
 import {CellCallback} from "../cell/CellTiles";
 import {Events} from "../Events";
 import EventManager from "../EventManager";
+import {ShortToTileType} from "../entities/EntityTile";
 
 export enum ColumnEvent {
     fill= 'ColumnFill'
@@ -63,7 +64,7 @@ export class Column extends Events {
     private _parse (columnData: ColumnData) {
         this._cells = [];
         columnData.forEach((obj, y) => {
-            let cell = this._createCell(obj, this.x, y);
+            let cell = this._createCell(ShortToTileType[obj], this.x, y);
             this._cells.push(cell);
         });
     }

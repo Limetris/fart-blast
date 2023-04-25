@@ -1,12 +1,12 @@
 {
   "field": [
-    ["hole", "cell", "cell", "cell", "cell", "cell", "cell", "cell", "hole"],
-    ["cell", "cell", "yellow", "yellow", "yellow", "yellow", "yellow", "yellow", "cell"],
-    ["cell", "cell", "yellow", "red", "purple", "blue", "green", "cell", "cell"],
-    ["cell", "cell", "cell", "cell", "cell", "cell", "cell", "cell", "cell"],
-    ["cell", "cell", "hole", "hole", "hole", "hole", "hole", "cell", "cell"],
-    ["cell", "cell", "cell", "cell", "cell", "cell", "cell", "cell", "cell"],
-    ["cell", "cell", "cell", "cell", "cell", "cell", "cell", "cell", "cell"],
-    ["hole", "cell", "cell", "cell", "cell", "cell", "cell", "cell", "hole"]
+    ["_", "e", "e", "e", "e", "e", "e", "e", "_"],
+    ["e", "e", "y", "y", "y", "y", "y", "y", "e"],
+    ["e", "e", "y", "r", "p", "b", "g", "e", "e"],
+    ["e", "e", "e", "e", "e", "e", "e", "e", "e"],
+    ["e", "e", "_", "_", "_", "_", "_", "e", "e"],
+    ["e", "e", "e", "e", "e", "e", "e", "e", "e"],
+    ["e", "e", "e", "e", "e", "e", "e", "e", "e"],
+    ["_", "e", "e", "e", "e", "e", "e", "e", "_"]
   ]
 }
