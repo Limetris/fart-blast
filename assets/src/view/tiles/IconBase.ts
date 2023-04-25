@@ -11,8 +11,5 @@ export class IconBase extends Component {
 
     }
 
-    update(deltaTime: number) {
-
-    }
 }
 

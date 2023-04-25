@@ -174,9 +174,25 @@ export class ViewGameField extends Component {
     }
 
     private _onStateHit(tiles: Tile[]) {
-        log(this._gameField.getMatrixIds());
-        this._gameField.state.next();
+        // TODO: очередь сгорания должна быть группами, чтобы более правильно отраатывать бомбы и ракеты
+        let promises = [];
+        let delay = 0;
+        tiles.forEach((tile)=> {
+            let viewCell = this.getCell(tile.x, tile.y);
+            let icon = viewCell.icon;
+            let promise = new Promise( resolve => setTimeout(() => {
+                icon.tile.destroy();
+                resolve();
+            }, delay * 1000) );
+            delay += 0.015;
+            promises.push(promise);
+        });
+        log('wait hit...');
+        Promise.all(promises).then(()=> {
+            this._gameField.state.next();
+        } );
     }
+
 
     private _onStateMerge(cell: Cell, tiles: Tile[]) {
         let promises = [];
@@ -191,6 +207,7 @@ export class ViewGameField extends Component {
             this._gameField.state.next();
         } );
     }
+
 
     private _onStateDrop() {
         let promises = [];

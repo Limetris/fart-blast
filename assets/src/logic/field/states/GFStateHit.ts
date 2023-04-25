@@ -21,9 +21,6 @@ export class GFStateHit extends GFState {
     }
 
     next(cell: Cell) {
-        this.hitTiles.forEach(tile => {
-           tile.destroy();
-        });
         this.context.toState(GFStateDrop.ID);
     }
 

@@ -28,7 +28,6 @@ export class Events {
         const listeners = this._events.get(event);
         if (!listeners)
             return false;
-        console.log(`event: ${event}`);
         listeners.forEach(listener => listener.callback.apply(null, args));
     }
 

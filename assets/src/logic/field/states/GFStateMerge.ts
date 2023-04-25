@@ -21,7 +21,6 @@ export class GFStateMerge extends GFState {
         this.tiles = cell.group.tiles;
         this.isBonusGroup = (this.cell.group instanceof BonusGroup);
 
-
         EventManager.dispatch(this.id, this.cell, this.tiles);
     }
 
