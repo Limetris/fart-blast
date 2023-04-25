@@ -21,20 +21,15 @@ export class ColorIcon extends Icon {
     }
 
     onTileDestroy() {
+        if (this.particle) {
+            this.particle.node.active = true;
+            const worldPos = this.particle.node.worldPosition;
+            this.particle.node.removeFromParent();
+            this.particle.node.setParent(this.viewGameFiled.node);
+            this.particle.node.worldPosition = worldPos;
+            this.particle.resetSystem();
+        }
         super.onTileDestroy();
-        if (!this.particle)
-            return;
-        // log('particle');
-        // TODO: not working
-        // this.particle.node.active = true;
-        // this.particle.enabled = true;
-        // this.particle.resetSystem();
-        // this.particle.addParticle();
-
-        // this.particle.addParticle();
-        // this.particle.
-        // this.particle.stopSystem();
-        // super.onTileDestroy();
     }
 
     onClick() {
@@ -42,4 +37,5 @@ export class ColorIcon extends Icon {
     }
 
 }
+
 

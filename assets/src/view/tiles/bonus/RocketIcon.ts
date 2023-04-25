@@ -1,6 +1,7 @@
-import {_decorator, Enum} from 'cc';
+import {_decorator, Enum, v2, v3, Quat} from 'cc';
 import {BonusIcon} from "./BonusIcon";
 import {BonusType} from "../../../logic/entities/EntityTile";
+import {RocketDirection, TileRocket} from "../../../logic/tiles/bonus/TileRocket";
 
 const { ccclass, property } = _decorator;
 
@@ -12,9 +13,11 @@ export class RocketIcon extends BonusIcon {
         override: true
     })
     type: BonusType = BonusType.rocket;
+    tile: TileRocket;
 
     start() {
-
+        if (this.tile.direction === RocketDirection.vertical)
+            this.node.rotate(Quat.fromEuler(new Quat(), 0, 0, 90));
     }
 
     update(deltaTime: number) {
