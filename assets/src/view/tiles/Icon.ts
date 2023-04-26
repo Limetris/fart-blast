@@ -2,7 +2,7 @@ import { _decorator, Component, Node, Sprite, Color, log, tween, Vec3, UITransfo
 import {IconBase} from "./IconBase";
 import { Cell } from '../../logic/cell/Cell';
 import {Tile, TileEvent} from '../../logic/tiles/Tile';
-import {ViewGameField} from "../game/ViewGameField";
+import {GameFieldIcons} from "../game/GameFieldIcons";
 const { ccclass, property, requireComponent } = _decorator;
 
 @ccclass('Icon')
@@ -12,7 +12,7 @@ export class Icon extends IconBase {
     static DROP_SPEED = 1300;
     static DROP_DELAY = 0.015;
 
-    viewGameFiled: ViewGameField;
+    gameFiledView: GameFieldIcons;
     protected sprite: Sprite;
 
     onLoad() {
@@ -42,7 +42,7 @@ export class Icon extends IconBase {
     }
 
     onTileChangeCell(tile: Tile, cellPrev: Cell, cellNew: Cell) {
-        let viewCell = this.viewGameFiled.getCell(cellNew.x, cellNew.y);
+        let viewCell = this.gameFiledView.getCell(cellNew.x, cellNew.y);
         if (viewCell) {
             const wordPos = this.node.getWorldPosition();
             this.node.setParent(viewCell.node);

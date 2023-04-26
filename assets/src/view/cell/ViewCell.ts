@@ -1,7 +1,7 @@
 import { _decorator, Component, Node, UITransform, Sprite, Button, log, Vec2, Vec3, tween, v2, v3 } from 'cc';
 import { CellBack } from './CellBack';
 import {Cell} from "../../logic/cell/Cell";
-import {ViewGameField} from "../game/ViewGameField";
+import {GameFieldIcons} from "../game/GameFieldIcons";
 import {Tile, TileEvent} from "../../logic/tiles/Tile";
 import {IconFactory} from "../tiles/factory/IconFactory";
 import EventManager from "../../logic/EventManager";
@@ -17,10 +17,10 @@ export enum ViewCellEvent {
 export class ViewCell extends Component {
 
     cell: Cell;
-    viewGameFiled: ViewGameField;
+    gameFiledView: GameFieldIcons;
 
-    init(viewGameField: ViewGameField, cell: Cell) {
-        this.viewGameFiled = viewGameField;
+    init(gameFiledView: GameFieldIcons, cell: Cell) {
+        this.gameFiledView = gameFiledView;
         this.cell = cell;
         this._createIcons();
     }
@@ -31,7 +31,7 @@ export class ViewCell extends Component {
 
     private _createIcon(tile: Tile): Icon {
         let icon = IconFactory.instance.create(tile);
-        icon.viewGameFiled = this.viewGameFiled;
+        icon.gameFiledView = this.gameFiledView;
         icon.node.setParent(this.node);
         return icon;
     }

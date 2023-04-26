@@ -25,7 +25,7 @@ export class ColorIcon extends Icon {
             this.particle.node.active = true;
             const worldPos = this.particle.node.worldPosition;
             this.particle.node.removeFromParent();
-            this.particle.node.setParent(this.viewGameFiled.node);
+            this.particle.node.setParent(this.gameFiledView.node);
             this.particle.node.worldPosition = worldPos;
             this.particle.resetSystem();
         }

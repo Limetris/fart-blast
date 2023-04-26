@@ -1,6 +1,6 @@
 import { _decorator, Component, Node } from 'cc';
 import {LevelsConfig} from "../LevelsConfig";
-import {ViewGameField} from "./ViewGameField";
+import {GameFieldView} from "./GameFieldView";
 import EventManager from "../../logic/EventManager";
 import {ViewCellEvent} from "../cell/ViewCell";
 import {Cell} from "../../logic/cell/Cell";
@@ -9,7 +9,7 @@ const { ccclass, property } = _decorator;
 @ccclass('GameController')
 export class GameController extends Component {
 
-    private _viewGameField: ViewGameField;
+    private _gameFieldView: GameFieldView;
 
     onLoad() {
         this._readComponents();
@@ -22,12 +22,12 @@ export class GameController extends Component {
     }
 
     private _readComponents() {
-        this._viewGameField = this.node.getComponentInChildren(ViewGameField);
+        this._gameFieldView = this.node.getComponentInChildren(GameFieldView);
     }
 
     private _initField() {
         const fieldData = LevelsConfig.instance.get(1);
-        this._viewGameField.init(fieldData);
+        this._gameFieldView.init(fieldData);
     }
 
     private _initListeners() {
