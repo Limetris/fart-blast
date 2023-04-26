@@ -106,27 +106,8 @@ export class CellTiles extends CellBase {
         tile.setCell(this);
     }
 
-
-
     onTileDestroy(tile: Tile) {
         this.remove(tile);
-    }
-
-    getTile(layerIndex: number): Tile {
-        return this._tiles[layerIndex];
-    }
-
-    eachAround(callback: CellCallback) {
-        if(!callback)
-            return;
-
-        for(let x = this.x-1, i=0; x <= this.x+1; x++, i++) {
-            for(let y = this.y-1, j=0; y <= this.y+1; y++, j++) {
-                if (x == this.x && y == this.y)
-                    continue;
-                this._callbackCell(this.gameField.getCell(x, y), callback)
-            }
-        }
     }
 
     eachNeighbor(callback: CellCallback) {
@@ -149,7 +130,6 @@ export class CellTiles extends CellBase {
             return '_';
         if(this.isEmpty)
             return 'e';
-
         return TileTypeToShort[this.tile.typeString];
     }
 }

@@ -74,6 +74,10 @@
       {
         "__uuid__": "fa9c1e25-16ed-47e0-a27a-f1dc22010ca0",
         "__expectedType__": "cc.JsonAsset"
+      },
+      {
+        "__uuid__": "c0b75e75-577f-4b20-84ba-962808e9a746",
+        "__expectedType__": "cc.JsonAsset"
       }
     ],
     "_id": ""
@@ -91,7 +95,6 @@
       "__id__": 0
     },
     "fileId": "c46/YsCPVOJYA4mWEpNYRx",
-    "instance": null,
     "targetOverrides": null
   }
 ]

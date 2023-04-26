@@ -115,6 +115,9 @@ export class GameFieldIcons extends Component {
         if(!column)
             return;
         const topCell = column.topCell;
+        if (!topCell)
+            return;
+
         const topViewCell = this.getCell(x, topCell.y);
         let worldPos = topViewCell.node.worldPosition;
         return v2(worldPos.x, worldPos.y + this.cellSize.height * 0.5);

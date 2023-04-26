@@ -24,7 +24,7 @@
       }
     ],
     "_prefab": {
-      "__id__": 9
+      "__id__": 12
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -83,7 +83,17 @@
         "__id__": 8
       }
     ],
-    "bonusTiles": [],
+    "bonusTiles": [
+      {
+        "__id__": 9
+      },
+      {
+        "__id__": 10
+      },
+      {
+        "__id__": 11
+      }
+    ],
     "blockTiles": [],
     "_id": ""
   },
@@ -132,6 +142,30 @@
     }
   },
   {
+    "__type__": "PrefabBonusTile",
+    "type": 0,
+    "prefab": {
+      "__uuid__": "fd3ed1b3-8c8a-484f-ba3c-8c4e6444db3b",
+      "__expectedType__": "cc.Prefab"
+    }
+  },
+  {
+    "__type__": "PrefabBonusTile",
+    "type": 1,
+    "prefab": {
+      "__uuid__": "c4b0fdd8-795d-43bb-ad45-ddde38fae8cf",
+      "__expectedType__": "cc.Prefab"
+    }
+  },
+  {
+    "__type__": "PrefabBonusTile",
+    "type": 2,
+    "prefab": {
+      "__uuid__": "16aa1418-ee21-4fc1-8dd0-36d825b40953",
+      "__expectedType__": "cc.Prefab"
+    }
+  },
+  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
@@ -140,7 +174,6 @@
       "__id__": 0
     },
     "fileId": "e5ICcKJl5LmaLaNhhWzJ4M",
-    "instance": null,
     "targetOverrides": null
   }
 ]
