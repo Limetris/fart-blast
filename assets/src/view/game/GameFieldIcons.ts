@@ -30,6 +30,8 @@ export class GameFieldIcons extends Component {
     protected _offset: Vec2 = Vec2.ZERO;
     protected _cells: ViewCell[][] = [];
 
+    get gameField(): GameFieldLogic { return this._gameField };
+
     init(filedData: IGameFieldData) {
         this._gameField = new GameFieldLogic(filedData);
         this.background?.init(this._gameField);
@@ -53,6 +55,7 @@ export class GameFieldIcons extends Component {
     }
 
     private _createTiles() {
+        this.cellsNode.removeAllChildren();
         this._cells = [];
         this._gameField.columns.forEach((column) => {
             let viewColumn: ViewCell[] = [];

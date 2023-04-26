@@ -1,7 +1,7 @@
 import {GameFieldData} from "./GameFieldData";
 import {ColumnData, IGameFieldData} from "../entities/EntityGame";
 import {Cell} from "../cell/Cell";
-import {Column} from "./Column";
+import {Column, ColumnCallback} from "./Column";
 import { CellCallback } from "../cell/CellTiles";
 import {Tile} from "../tiles/Tile";
 
@@ -27,25 +27,16 @@ export class GameFieldCells extends  GameFieldData {
         return this._columns[columnIndex];
     }
 
+    eachColumn(callback: ColumnCallback) {
+        if(!callback)
+            return;
+        this._columns.forEach(column => callback(column));
+    }
 
     eachCell(callback: CellCallback) {
         if(!callback)
             return;
-        this._columns.forEach((column, x) => {
-            column.eachCell(callback);
-        });
-    }
-
-    drop() {
-        this._columns.forEach((column, x) => {
-            column.drop();
-        });
-    }
-
-    fill () {
-        this._columns.forEach((column, x) => {
-            column.fill();
-        });
+        this.eachColumn(column => column.eachCell(callback));
     }
 
     hitCell(x: number, y: number): Tile[] {

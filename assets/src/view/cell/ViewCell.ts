@@ -64,8 +64,10 @@ export class ViewCell extends Component {
     onClick(event) {
         if(this.cell.isHole)
             return;
-
         const tile = this.cell.tile;
+        if(!tile)
+            return;
+
         log(`cell [${this.cell.x},${this.cell.y}] click: ${tile.typeString}`);
         EventManager.dispatch(ViewCellEvent.click, this);
     }

@@ -6,6 +6,7 @@ import {GFStateDrop} from "./GFStateDrop";
 import {Tile} from "../../tiles/Tile";
 import {GFStateGroups} from "./GFStateGroups";
 import { GFStateHit } from "./GFStateHit";
+import {GFStateCheckGame} from "./GFStateCheckGame";
 
 export class GFStateSequenceHit extends GFState {
     static ID = GFStateSequenceHit.name;
@@ -18,7 +19,7 @@ export class GFStateSequenceHit extends GFState {
                 return;
             }
         }
-        this.context.toState(GFStateGroups);
+        this.context.toState(GFStateCheckGame);
     }
 
     next() {

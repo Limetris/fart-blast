@@ -6,6 +6,7 @@ type MapState = Map<any, StateBase>;
 export abstract class FSM  {
     private _states: MapState = new Map<any, StateBase>();
     private _state: StateBase;
+    private _prevState: StateBase;
 
     protected constructor() {
 
@@ -44,6 +45,10 @@ export abstract class FSM  {
         return this._state;
     }
 
+    get prevState (): StateBase {
+        return this._prevState;
+    }
+
     toState(id: any, ...args: any[]) {
         if (typeof id !== 'string')
             id = id.ID;
@@ -51,6 +56,7 @@ export abstract class FSM  {
         const state = this._getState(id);
         if (state) {
             this._exitState(this._state, args);
+            this._prevState = this._state;
             this._state = state;
             this._enterState(this._state, args);
         }

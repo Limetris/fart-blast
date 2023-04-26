@@ -2,7 +2,7 @@ import {ColumnData} from "../entities/EntityGame";
 import {Cell} from "../cell/Cell";
 import {CellType, CellDataAsUnion} from "../entities/EntityCell";
 import {GameFieldCells} from "./GameFieldCells";
-import {CellCallback} from "../cell/CellTiles";
+import {CellCallback, CellTiles} from "../cell/CellTiles";
 import {Events} from "../Events";
 import EventManager from "../EventManager";
 import {ShortToTileType} from "../entities/EntityTile";
@@ -10,6 +10,8 @@ import {ShortToTileType} from "../entities/EntityTile";
 export enum ColumnEvent {
     fill= 'ColumnFill'
 }
+
+export type ColumnCallback = (column: Column) => void;
 
 export class Column extends Events {
     readonly gameField: GameFieldCells;

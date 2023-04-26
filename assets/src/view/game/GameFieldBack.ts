@@ -38,6 +38,7 @@ export class GameFieldBack extends Component {
     }
 
     private _createBacks() {
+        this.node.removeAllChildren();
         for(let x = 0; x < this._gameField.columnCount + 1; x++) {
             for(let y = 0; y < this._gameField.rowCount + 1; y++) {
                 this._createCell(x, y);

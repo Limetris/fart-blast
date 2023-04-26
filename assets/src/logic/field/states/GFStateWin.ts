@@ -3,19 +3,19 @@ import { Cell } from "../../cell/Cell";
 import {GFStateIdle} from "./GFStateIdle";
 import EventManager from "../../EventManager";
 import {GFStateSequenceHit} from "./GFStateSequenceHit";
+import {Tile} from "../../tiles/Tile";
+import {GFStateGroups} from "./GFStateGroups";
 
-export class GFStateDrop extends GFState {
-    static ID = GFStateDrop.name;
+export class GFStateWin extends GFState {
+    static ID = GFStateWin.name;
 
     onEnter() {
-        this.context.eachColumn(column => column.drop());
-        this.context.eachColumn(column => column.fill());
 
         EventManager.dispatch(this.id);
     }
 
     next() {
-        this.context.toState(GFStateSequenceHit);
+        // this.context.toState(GFStateGroups);
     }
 
     onExit() {
