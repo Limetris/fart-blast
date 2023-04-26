@@ -1,9 +1,9 @@
 import { _decorator, Component, Node } from 'cc';
 import {LevelsConfig} from "../LevelsConfig";
-import {GameFieldView} from "./GameFieldView";
 import EventManager from "../../logic/EventManager";
 import {ViewCellEvent} from "../cell/ViewCell";
 import {Cell} from "../../logic/cell/Cell";
+import { GameFieldView } from './GameFieldView';
 const { ccclass, property } = _decorator;
 
 @ccclass('GameController')
