@@ -13,6 +13,7 @@ import {Booster} from "../boosters/Booster";
 
 export class GameFieldLogic extends GameFieldCells {
 
+    private _selectedBooster: Booster;
     private _groups: CellGroup[];
     sequenceHitTiles: Tile[] = [];
     get groups(): CellGroup[] { return this._groups;  }
@@ -25,8 +26,12 @@ export class GameFieldLogic extends GameFieldCells {
     }
 
     click(cell: Cell) {
-        if(this.state.id === GFStateIdle.ID)
-            this.toState(GFStateClick, cell);
+        if(this.state.id === GFStateIdle.ID) {
+            if (this._selectedBooster)
+                this._applySelectedBooster(cell);
+            else
+                this.toState(GFStateClick, cell);
+        }
     }
 
     searchGroups () {
@@ -49,11 +54,28 @@ export class GameFieldLogic extends GameFieldCells {
 
     private _initListeners() {
         BoosterController.subscribe(BoosterControllerEvent.active, this._activeBooster.bind(this), this);
+        BoosterController.subscribe(BoosterControllerEvent.selected, this._onSelectBooster.bind(this), this);
+        BoosterController.subscribe(BoosterControllerEvent.unselected, this._onUnselectBooster.bind(this), this);
+    }
+
+    private _applySelectedBooster(cell: Cell) {
+        if(this._selectedBooster) {
+            this._selectedBooster.apply(this, cell);
+            this._onUnselectBooster();
+        }
     }
 
     private _activeBooster(booster: Booster) {
         if(this.state.id === GFStateIdle.ID)
             booster.apply(this);
+    }
+
+    private _onSelectBooster(booster: Booster) {
+        this._selectedBooster = booster;
+    }
+
+    private _onUnselectBooster() {
+        this._selectedBooster = undefined
     }
 
 

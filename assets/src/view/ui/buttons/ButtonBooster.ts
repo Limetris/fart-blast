@@ -13,6 +13,7 @@ export abstract class ButtonBooster extends ButtonBase {
     abstract initBuster(): Booster;
 
     start() {
+        super.start();
         this.initBuster();
         this.booster.subscribe(BoosterEvent.countChanged, this._onCountChanged.bind(this), this);
         this._onCountChanged(this.booster.count);

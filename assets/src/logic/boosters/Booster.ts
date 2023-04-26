@@ -2,7 +2,8 @@ import {GameFieldLogic} from "../field/GameFieldLogic";
 import {BoosterBase} from "./BoosterBase";
 
 export enum BoosterEvent {
-    countChanged
+    countChanged,
+    applied
 }
 
 export abstract class Booster extends BoosterBase {
@@ -19,6 +20,7 @@ export abstract class Booster extends BoosterBase {
             return false;
 
         this.count--;
+        this.dispatch(BoosterEvent.applied, this._count);
         return true;
     }
 

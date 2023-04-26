@@ -9,7 +9,8 @@ type BoosterMap = Map<string, Booster>
 export enum BoosterControllerEvent {
     active,
     activated,
-    selected
+    selected,
+    unselected
 }
 
 class BoosterController extends Events {
@@ -43,14 +44,32 @@ class BoosterController extends Events {
     }
 
     active(boosterType: any): boolean {
+        this.unselect();
         let booster = this.getBooster(boosterType);
         if (!booster)
             return false;
         if (booster.isEmpty)
             return false;
 
+        console.log(`active booster: ${booster.name}`);
         this.dispatch(BoosterControllerEvent.active, booster);
         return true;
+    }
+
+    select(boosterType: any): boolean {
+        let booster = this.getBooster(boosterType);
+        if (!booster)
+            return false;
+        if (booster.isEmpty)
+            return false;
+        console.log(`select booster: ${booster.name}`);
+        this.dispatch(BoosterControllerEvent.selected, booster);
+        return true;
+    }
+
+    unselect() {
+        console.log(`unselect booster`);
+        this.dispatch(BoosterControllerEvent.unselected);
     }
 
 
