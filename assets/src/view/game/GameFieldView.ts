@@ -12,6 +12,7 @@ import {GFStateDrop} from "../../logic/field/states/GFStateDrop";
 import {GFStateMerge} from "../../logic/field/states/GFStateMerge";
 import {Column, ColumnEvent} from "../../logic/field/Column";
 import {GameFieldIcons} from "./GameFieldIcons";
+import {GFStateShuffle} from "../../logic/field/states/GFStateShuffle";
 const { ccclass, property } = _decorator;
 
 
@@ -43,6 +44,7 @@ export class GameFieldView extends GameFieldIcons {
         EventManager.subscribe(GFStateHit.ID, this._onStateHit.bind(this), this);
         EventManager.subscribe(GFStateMerge.ID, this._onStateMerge.bind(this), this);
         EventManager.subscribe(GFStateDrop.ID, this._onStateDrop.bind(this), this);
+        EventManager.subscribe(GFStateShuffle.ID, this._onStateShuffle.bind(this), this);
     }
 
     private _onColumnFill(column: Column, cells: Cell[]) {
@@ -129,6 +131,23 @@ export class GameFieldView extends GameFieldIcons {
             }
         });
         log('wait dropping...');
+        Promise.all(promises).then(()=> {
+            this._gameField.state.next();
+        } );
+    }
+
+
+    private _onStateShuffle() {
+        let promises = [];
+        this._cells.forEach((viewColumn)=> {
+            for(let y = viewColumn.length - 1; y >= 0; y--) {
+                let viewCell = viewColumn[y];
+                let icon = viewCell.icon;
+                if (icon)
+                    promises.push(icon.flyToHome());
+            }
+        });
+        log('wait shuffle...');
         Promise.all(promises).then(()=> {
             this._gameField.state.next();
         } );

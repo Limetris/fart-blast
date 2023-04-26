@@ -96,6 +96,23 @@ export class Icon extends IconBase {
         });
     }
 
+    async flyToHome(delay: number = 0): Promise<Icon> {
+        const pos = Vec3.ZERO;
+        let tweenDuration: number = 0.8;
+        return new Promise(resolve => {
+            tween(this.node)
+                .delay(delay)
+                .to(tweenDuration, { position: pos }, {
+                    easing: "backInOut",
+                    onComplete: (target?: object) => {
+                        this.node.position = pos;
+                        resolve(this);
+                    }
+                })
+                .start();
+        });
+    }
+
     onClick() {
 
     }

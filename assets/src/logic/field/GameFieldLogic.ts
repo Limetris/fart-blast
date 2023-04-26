@@ -8,6 +8,8 @@ import {GFStateIdle} from "./states/GFStateIdle";
 import {Events} from "../Events";
 import {GFStateGroups} from "./states/GFStateGroups";
 import {Tile} from "../tiles/Tile";
+import BoosterController, {BoosterControllerEvent} from "../boosters/BoosterController";
+import {Booster} from "../boosters/Booster";
 
 export class GameFieldLogic extends GameFieldCells {
 
@@ -18,6 +20,7 @@ export class GameFieldLogic extends GameFieldCells {
     constructor(gameFieldData: IGameFieldData) {
         super(gameFieldData);
         this.initFsm();
+        this._initListeners();
         this.toState(GFStateGroups);
     }
 
@@ -43,6 +46,17 @@ export class GameFieldLogic extends GameFieldCells {
         });
         this._groups = [];
     }
+
+    private _initListeners() {
+        BoosterController.subscribe(BoosterControllerEvent.active, this._activeBooster.bind(this), this);
+    }
+
+    private _activeBooster(booster: Booster) {
+        if(this.state.id === GFStateIdle.ID)
+            booster.apply(this);
+    }
+
+
 
 
 }

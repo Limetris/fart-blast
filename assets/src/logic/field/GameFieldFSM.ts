@@ -6,6 +6,7 @@ import {GFStateHit} from "./states/GFStateHit";
 import {GFStateMerge} from "./states/GFStateMerge";
 import {GFStateDrop} from "./states/GFStateDrop";
 import {GFStateSequenceHit} from "./states/GFStateSequenceHit";
+import { GFStateShuffle } from "./states/GFStateShuffle";
 
 export class GameFieldFSM extends FSM {
 
@@ -24,6 +25,7 @@ export class GameFieldFSM extends FSM {
         this.addState(GFStateHit);
         this.addState(GFStateMerge);
         this.addState(GFStateDrop);
+        this.addState(GFStateShuffle);
         this.addState(GFStateSequenceHit);
     }
 
