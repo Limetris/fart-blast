@@ -35,9 +35,6 @@ export class GameFieldIcons extends Component {
     init(filedData: IGameFieldData) {
         this._gameField = new GameFieldLogic(filedData);
         this.background?.init(this._gameField);
-    }
-
-    onLoad() {
         this._offset = this._getOffset();
         this._createTiles();
     }
@@ -54,9 +51,14 @@ export class GameFieldIcons extends Component {
         );
     }
 
-    private _createTiles() {
+    private _clearCells() {
+        this.eachCell(viewCell => viewCell.destroy());
         this.cellsNode.removeAllChildren();
         this._cells = [];
+    }
+
+    private _createTiles() {
+        this._clearCells();
         this._gameField.columns.forEach((column) => {
             let viewColumn: ViewCell[] = [];
             column.cells.forEach((cell) => {

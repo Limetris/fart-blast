@@ -44,6 +44,13 @@ export class ViewCell extends Component {
     }
 
     onDestroy() {
+        this.node.children.forEach((iconNode: Node) => {
+            let icon = iconNode.getComponent(Icon);
+            if(icon)
+                icon.destroy();
+        });
+        this.node.removeAllChildren();
+
         this.node.off(Node.EventType.TOUCH_END, this.onClick, this);
         this.cell.unsubscribeTag(this);
     }

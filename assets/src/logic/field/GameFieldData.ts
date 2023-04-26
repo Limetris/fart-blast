@@ -11,7 +11,8 @@ export class GameFieldData extends GameFieldFSM {
         super();
         GameFieldData.validate(gameData);
 
-        this.gameData = gameData;
+        this.gameData = {} as IGameFieldData;
+        Object.assign(this.gameData, gameData);
         this.gameData.field = this.gameData.field[0].map((col, colIndex) => this.gameData.field.map(row => row[colIndex]));
         this.columnCount = this.gameData.field.length;
         this.rowCount = this.gameData.field[0].length;

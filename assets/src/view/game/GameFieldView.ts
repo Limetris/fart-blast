@@ -13,6 +13,9 @@ import {GFStateMerge} from "../../logic/field/states/GFStateMerge";
 import {Column, ColumnEvent} from "../../logic/field/Column";
 import {GameFieldIcons} from "./GameFieldIcons";
 import {GFStateShuffle} from "../../logic/field/states/GFStateShuffle";
+import {GFStateInit} from "../../logic/field/states/GFStateInit";
+import {IGameFieldData} from "../../logic/entities/EntityGame";
+import {GameFieldLogic} from "../../logic/field/GameFieldLogic";
 const { ccclass, property } = _decorator;
 
 
@@ -22,9 +25,13 @@ export type ViewCellCallback = (cell: ViewCell) => void;
 export class GameFieldView extends GameFieldIcons {
 
     onLoad() {
-        super.onLoad();
         this._initListeners();
-        this._onStateGroups();
+        this.gameField.state.next();
+    }
+
+    init(filedData: IGameFieldData) {
+        super.init(filedData);
+        this.gameField.state.next();
     }
 
     onDestroy() {
@@ -33,10 +40,11 @@ export class GameFieldView extends GameFieldIcons {
     }
 
     private _initListeners() {
-
+        EventManager.unsubscribeTag(this);
         EventManager.subscribe(ViewCellEvent.click, this._onCellClick.bind(this), this);
         EventManager.subscribe(ColumnEvent.fill, this._onColumnFill.bind(this), this);
 
+        EventManager.subscribe(GFStateInit.ID, this._onStateInit.bind(this), this);
         EventManager.subscribe(GFStateGroups.ID, this._onStateGroups.bind(this), this);
         EventManager.subscribe(GFStateIdle.ID, this._onStateIdle.bind(this), this);
         EventManager.subscribe(GFStateClick.ID, this._onStateClick.bind(this), this);
@@ -48,23 +56,22 @@ export class GameFieldView extends GameFieldIcons {
     }
 
     private _onColumnFill(column: Column, cells: Cell[]) {
-
         let startPos = this._getStartColumnWorldCoordinate(column.x);
         cells.forEach((cell, i) => {
             let viewCell = this.getCell(cell.x, cell.y);
+            if(!viewCell)
+                return;
             let icon = viewCell.icon;
             if (icon)
                 icon.node.setWorldPosition(startPos.x, startPos.y + (cells.length - i) * this.cellSize.height, 0);
         });
     }
 
+    private _onStateInit() {
+
+    }
+
     private _onStateGroups() {
-        // this.eachCell((viewCell) => {
-        //     viewCell.node.children.forEach((iconNode) => {
-        //         let icon = iconNode.getComponent(Icon);
-        //         icon.alpha(viewCell.cell?.group?.canHit ? 1 : 0.2);
-        //     });
-        // });
         // TODO: индикация резулттата объединения на тайлах
         this._gameField.state.next();
     }

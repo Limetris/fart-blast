@@ -28,6 +28,7 @@ export class ColorIcon extends Icon {
             this.particle.node.setParent(this.gameFiledView.node);
             this.particle.node.worldPosition = worldPos;
             this.particle.resetSystem();
+            this.particle = undefined;
         }
         super.onTileDestroy();
     }

@@ -15,10 +15,14 @@ export class GFStateClick extends GFState {
 
     next(cell: Cell) {
         if (cell.canHit && cell.group) {
-            if(cell.group.canMerge)
+            if(cell.group.canMerge) {
+                this.context.steps--;
                 this.context.toState(GFStateMerge, cell);
-            else if (cell.group.canHit)
+            }
+            else if (cell.group.canHit) {
+                this.context.steps--;
                 this.context.toState(GFStateHit, cell);
+            }
             else
                 this.context.toState(GFStateIdle);
         }

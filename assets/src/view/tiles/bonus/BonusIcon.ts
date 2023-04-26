@@ -11,12 +11,5 @@ export class BonusIcon extends Icon {
     })
     type: BonusType;
 
-    start() {
-
-    }
-
-    update(deltaTime: number) {
-
-    }
 }
 

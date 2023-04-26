@@ -6,7 +6,7 @@ const { ccclass, property, requireComponent } = _decorator;
 @requireComponent(Button)
 @requireComponent(Sprite)
 export abstract class  ButtonBase extends Component {
-    abstract onClick();
+    abstract onClick(...args: any[]);
 
     protected button: Button;
     protected sprite: Sprite;

@@ -22,6 +22,10 @@ export class LevelsConfig extends Component {
         LevelsConfig._instance = this;
     }
 
+    has(level: number): boolean {
+        return !!this.configs[level - 1];
+    }
+
     get(level: number): IGameFieldData {
         const config = this.configs[level - 1];
         assert(config, 'level config is undefined');

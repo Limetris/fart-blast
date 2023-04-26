@@ -21,9 +21,6 @@ export class GameFieldBack extends Component {
 
     init(gameField: GameFieldLogic) {
         this._gameField = gameField;
-    }
-
-    onLoad() {
         this._transform = this.getComponent(UITransform);
         this._offset = this._getOffset();
         this._createBacks();

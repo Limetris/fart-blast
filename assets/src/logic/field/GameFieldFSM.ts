@@ -10,6 +10,7 @@ import { GFStateShuffle } from "./states/GFStateShuffle";
 import {GFStateGameOver} from "./states/GFStateGameOver";
 import {GFStateWin} from "./states/GFStateWin";
 import {GFStateCheckGame} from "./states/GFStateCheckGame";
+import { GFStateInit } from "./states/GFStateInit";
 
 export class GameFieldFSM extends FSM {
 
@@ -22,6 +23,7 @@ export class GameFieldFSM extends FSM {
     }
 
     private _initStates() {
+        this.addState(GFStateInit);
         this.addState(GFStateIdle);
         this.addState(GFStateGroups);
         this.addState(GFStateClick);

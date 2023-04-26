@@ -11,5 +11,5 @@
   ],
   "colors": ["y", "r", "p", "b", "g"],
   "steps": 30,
-  "points": 500
+  "points": 10
 }

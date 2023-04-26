@@ -13,6 +13,7 @@ import {Booster} from "../boosters/Booster";
 import EventManager from "../EventManager";
 import {GFStateHit} from "./states/GFStateHit";
 import {GFStateMerge} from "./states/GFStateMerge";
+import {GFStateInit} from "./states/GFStateInit";
 
 export enum GameFieldEvent {
     pointsChanged= 'pointsChanged',
@@ -44,7 +45,7 @@ export class GameFieldLogic extends GameFieldCells {
         this.initFsm();
         this._initGoals();
         this._initListeners();
-        this.toState(GFStateGroups);
+        this.toState(GFStateInit);
     }
 
     private _initGoals() {
@@ -56,10 +57,8 @@ export class GameFieldLogic extends GameFieldCells {
         if(this.state.id === GFStateIdle.ID) {
             if (this._selectedBooster)
                 this._applySelectedBooster(cell);
-            else {
-                this.steps--;
+            else
                 this.toState(GFStateClick, cell);
-            }
         }
     }
 
