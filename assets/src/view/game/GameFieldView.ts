@@ -65,6 +65,8 @@ export class GameFieldView extends GameFieldIcons {
         //         icon.alpha(viewCell.cell?.group?.canHit ? 1 : 0.2);
         //     });
         // });
+        // TODO: индикация резулттата объединения на тайлах
+        this._gameField.state.next();
     }
 
     private _onStateIdle() {

@@ -1,6 +1,7 @@
 import { GFState } from "./GFState";
 import {GFStateIdle} from "./GFStateIdle";
 import EventManager from "../../EventManager";
+import {GFStateShuffle} from "./GFStateShuffle";
 
 export class GFStateGroups extends GFState {
     static ID = GFStateGroups.name;
@@ -8,11 +9,13 @@ export class GFStateGroups extends GFState {
     onEnter() {
         this.context.searchGroups();
         EventManager.dispatch(this.id);
-        this.context.toState(GFStateIdle);
     }
 
     next() {
-
+        if (this.context.groups.length > 0)
+            this.context.toState(GFStateIdle);
+        else
+            this.context.toState(GFStateShuffle);
     }
 
     onExit() {

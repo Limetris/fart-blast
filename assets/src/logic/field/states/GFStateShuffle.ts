@@ -4,6 +4,7 @@ import {GFStateIdle} from "./GFStateIdle";
 import EventManager from "../../EventManager";
 import {GFStateSequenceHit} from "./GFStateSequenceHit";
 import {Tile} from "../../tiles/Tile";
+import {GFStateGroups} from "./GFStateGroups";
 
 export class GFStateShuffle extends GFState {
     static ID = GFStateShuffle.name;
@@ -31,7 +32,7 @@ export class GFStateShuffle extends GFState {
     }
 
     next() {
-        this.context.toState(GFStateSequenceHit);
+        this.context.toState(GFStateGroups);
     }
 
     onExit() {
