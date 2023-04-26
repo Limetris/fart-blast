@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, log, UITransform, Size, size, Enum, v2, Vec2, Vec3, v3 } from 'cc';
+import { _decorator, Component, Node, log, UITransform, Size, size, Enum, v2, Vec2, Vec3, v3, view } from 'cc';
 const { ccclass, property, executeInEditMode, requireComponent } = _decorator;
 
 /**
@@ -43,9 +43,9 @@ export class WidgetFit extends Component {
     private _startSize: Size = Size.ZERO;
     private _startScale: Vec2 = Vec2.ONE;
     private _ratio: number = 0;
+
     start () {
         this._transform = this.getComponent(UITransform);
-        // this._startScale = this.node.scale.clone();
         this._startSize = size(this._transform.width * this._startScale.x, this._transform.height * this._startScale.y);
         this._ratio = this._startSize.width / this._startSize.height;
         if(!this._target)
