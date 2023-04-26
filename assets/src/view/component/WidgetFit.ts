@@ -41,7 +41,7 @@ export class WidgetFit extends Component {
     private _transform: UITransform = undefined;
     private _targetTransform: UITransform = undefined;
     private _startSize: Size = Size.ZERO;
-    private _startScale: Vec3 = Vec3.ONE;
+    private _startScale: Vec2 = Vec2.ONE;
     private _ratio: number = 0;
     start () {
         this._transform = this.getComponent(UITransform);
@@ -98,18 +98,18 @@ export class WidgetFit extends Component {
                 break;
             case WidgetFitType.ALL:
                 let scale = Math.min(this._targetTransform.width / this._startSize.width, this._targetTransform.height / this._startSize.height);
-                this.node.scale = v3(scale, scale, scale);
+                this.node.setScale(scale, scale);
                 break;
         }
     }
 
     private _fitWidth() {
         const scale = this._targetTransform.width / this._startSize.width;
-        this.node.scale = v3(scale, scale, scale);
+        this.node.setScale(scale, scale);
     }
 
     private _fitHeight() {
         const scale = this._targetTransform.height / this._startSize.height;
-        this.node.scale = v3(scale, scale, scale);
+        this.node.setScale(scale, scale);
     }
 }
