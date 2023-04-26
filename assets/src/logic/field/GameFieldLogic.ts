@@ -49,8 +49,8 @@ export class GameFieldLogic extends GameFieldCells {
     }
 
     private _initGoals() {
-        this._steps = this.gameData.steps;
-        this._points = 0;
+        this.steps = this.gameData.steps;
+        this.points = 0;
     }
 
     click(cell: Cell) {
