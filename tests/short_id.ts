@@ -1,15 +1,15 @@
-export const y = 'yellow';
-export const r = 'red';
-export const p = 'purple';
-export const b = 'blue';
-export const g = 'green';
+export const y = 'y';
+export const r = 'r';
+export const p = 'p';
+export const b = 'b';
+export const g = 'g';
 
-export const e = 'cell';
-export const _ = 'hole';
+export const e = 'e';
+export const _ = '_';
 
-export const O = 'bubble';
-export const X = 'box';
+export const O = 'O';
+export const X = 'X';
 
-export const B = 'bomb';
-export const R = 'rocket';
-export const D = 'disco';
+export const B = 'B';
+export const R = 'R';
+export const D = 'D';

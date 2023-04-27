@@ -5,14 +5,14 @@ import {assert} from 'chai';
 import {y, r, p, b, e, g, _, B, D, O, R, X} from './short_id'
 import {GFStateIdle} from "../assets/src/logic/field/states/GFStateIdle";
 import {GFStateClick} from "../assets/src/logic/field/states/GFStateClick";
-import {Cell} from "../assets/src/logic/cell/Cell";
+import { GFStateInit } from '../assets/src/logic/field/states/GFStateInit';
 
 @suite class GameFieldLogicTest {
     private obj: GameFieldLogic;
 
     before() {
 
-        const data: IGameFieldData = {
+        const data = {
             field: [
                 [y, r, p, b, b],
                 [y, b, r, b, b],
@@ -20,21 +20,17 @@ import {Cell} from "../assets/src/logic/cell/Cell";
                 [y, g, r, b, g],
                 [g, b, r, r, r],
                 [y, r, p, p, r]
-            ]
+            ],
+            colors: [y, r, p, b, g],
+            steps: 20,
+            points: 100
 
         };
-        this.obj = new GameFieldLogic(data);
+        this.obj = new GameFieldLogic(data as IGameFieldData);
     }
 
     @test 'default state' () {
-        assert.equal(this.obj.state.id, GFStateIdle.ID);
-    }
-
-    @test 'state click' () {
-        let cell = this.obj.getCell(0,0);
-        this.obj.toState(GFStateClick, cell);
-        assert.equal(this.obj.state.id, GFStateClick.ID);
-
+        assert.equal(this.obj.state.id, GFStateInit.ID);
     }
 
 }

@@ -1,5 +1,5 @@
 export abstract class StateBase {
-    readonly id: string;
+    id: string;
     abstract context: any;
 
     abstract onEnter    (...args: any[]): any;

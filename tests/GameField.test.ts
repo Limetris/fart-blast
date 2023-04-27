@@ -12,7 +12,7 @@ import {y, r, p, b, e, g, _, B, D, O, R, X} from './short_id'
 
     before() {
 
-        const data: IGameFieldData = {
+        const data = {
             field: [
                 [_, e, e, e, e, e, e, e, _],
                 [e, e, e, e, e, e, e, e, e],
@@ -22,9 +22,12 @@ import {y, r, p, b, e, g, _, B, D, O, R, X} from './short_id'
                 [e, e, e, e, e, e, e, e, e],
                 [e, e, e, e, e, e, e, e, e],
                 [_, e, e, e, e, e, e, e, _]
-            ]
+            ],
+            colors: [y, r, p, b, g],
+            steps: 20,
+            points: 100
         };
-        this.obj = new GameFieldLogic(data);
+        this.obj = new GameFieldLogic(data as IGameFieldData);
     }
 
     @test 'is created' () {
