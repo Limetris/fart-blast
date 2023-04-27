@@ -1,7 +1,6 @@
 import { _decorator, Component, Node, Prefab, Enum, Sprite, Vec2, SpriteFrame, v2 } from 'cc';
 const { ccclass, property } = _decorator;
 
-// TODO: заменить на другую систему тайлов 8 угло + 4 стены + полнотелый
 export enum CellBackType {
     HOLE            = 0,
 

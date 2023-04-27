@@ -6,7 +6,6 @@ const { ccclass, property, requireComponent } = _decorator;
 @ccclass('GameFieldBack')
 @requireComponent(UITransform)
 export class GameFieldBack extends Component {
-    // TODO:  похоже на GameFieldIcons
 
     @property(Prefab)
     prefabCellBack: Prefab;
