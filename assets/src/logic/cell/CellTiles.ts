@@ -2,7 +2,6 @@ import {CellDataAsUnion, CellType, ICellData} from "../entities/EntityCell";
 import {CellBase} from "./CellBase";
 import {Tile, TileEvent} from "../tiles/Tile";
 import TileFactory from "../TileFactory";
-import {Cell} from "./Cell";
 import {TileTypeToShort} from "../entities/EntityTile";
 
 export type CellCallback = (cell: CellTiles) => void;

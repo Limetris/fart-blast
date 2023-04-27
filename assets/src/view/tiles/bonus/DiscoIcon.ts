@@ -1,7 +1,6 @@
 import { _decorator, Component, Node, Enum, Color, log } from 'cc';
 import {BonusIcon} from "./BonusIcon";
 import {BonusType, ColorType} from "../../../logic/entities/EntityTile";
-import {TileRocket} from "../../../logic/tiles/bonus/TileRocket";
 import {TileDisco} from "../../../logic/tiles/bonus/TileDisco";
 const { ccclass, property } = _decorator;
 

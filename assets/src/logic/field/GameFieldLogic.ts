@@ -1,12 +1,8 @@
 import {IGameFieldData} from "../entities/EntityGame";
-import {CellGroup} from "../tiles/CellGroup";
 import { GameFieldCells } from "./GameFieldCells";
-import {Group} from "../tiles/Group";
 import {Cell} from "../cell/Cell";
 import {GFStateClick} from "./states/GFStateClick";
 import {GFStateIdle} from "./states/GFStateIdle";
-import {Events} from "../Events";
-import {GFStateGroups} from "./states/GFStateGroups";
 import {Tile, TilesHit} from "../tiles/Tile";
 import BoosterController, {BoosterControllerEvent} from "../boosters/BoosterController";
 import {Booster} from "../boosters/Booster";

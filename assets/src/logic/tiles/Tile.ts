@@ -1,9 +1,7 @@
 import {BonusType, ColorType, TileType} from "../entities/EntityTile";
 import {TileBase} from "./TileBase";
-import {CellGroup} from "./CellGroup";
 import {CellTiles} from "../cell/CellTiles";
 import {GameFieldCells} from "../field/GameFieldCells";
-import { Cell } from "../cell/Cell";
 
 export enum TileEvent {
     hit,

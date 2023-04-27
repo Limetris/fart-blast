@@ -1,8 +1,6 @@
 import { _decorator, Component, Node, Enum, ParticleSystem2D, log } from 'cc';
 import {ColorType} from "../../logic/entities/EntityTile";
 import {Icon} from "./Icon";
-import {Tile} from "../../logic/tiles/Tile";
-import {Cell} from "../../logic/cell/Cell";
 const { ccclass, property } = _decorator;
 
 @ccclass('ColorIcon')

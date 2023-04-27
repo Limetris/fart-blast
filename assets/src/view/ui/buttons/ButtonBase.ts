@@ -1,5 +1,4 @@
 import { _decorator, Component, Node, Button, Sprite } from 'cc';
-import {BoosterEvent} from "../../../logic/boosters/Booster";
 const { ccclass, property, requireComponent } = _decorator;
 
 @ccclass('ButtonBase')

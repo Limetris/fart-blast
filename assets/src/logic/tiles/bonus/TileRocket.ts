@@ -1,7 +1,7 @@
-import {BonusType, COLORS} from "../../entities/EntityTile";
+import {BonusType} from "../../entities/EntityTile";
 import { TileBonus } from "./TileBonus";
 import EnumToArray from "../../utils/EnumToArray";
-import {Tile, TileEvent, TilesHit} from "../Tile";
+import {Tile, TilesHit} from "../Tile";
 
 export enum RocketDirection {
     horizontal,

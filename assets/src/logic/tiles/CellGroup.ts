@@ -1,11 +1,8 @@
-import {GameFieldLogic} from "../field/GameFieldLogic";
 import {Tile, TilesHit} from "./Tile";
 import { Cell } from "../cell/Cell";
 import {GameFieldCells} from "../field/GameFieldCells";
 import {BonusType, ColorType, TileType} from "../entities/EntityTile";
-import {CellTiles} from "../cell/CellTiles";
 import {CellDataAsUnion} from "../entities/EntityCell";
-import TileFactory from "../TileFactory";
 import {TileDisco} from "./bonus/TileDisco";
 import {TileColor} from "./TileColor";
 

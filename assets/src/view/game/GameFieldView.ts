@@ -15,7 +15,6 @@ import {GameFieldIcons} from "./GameFieldIcons";
 import {GFStateShuffle} from "../../logic/field/states/GFStateShuffle";
 import {GFStateInit} from "../../logic/field/states/GFStateInit";
 import {IGameFieldData} from "../../logic/entities/EntityGame";
-import {GameFieldLogic} from "../../logic/field/GameFieldLogic";
 const { ccclass, property } = _decorator;
 
 

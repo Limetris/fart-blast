@@ -1,5 +1,4 @@
 import { _decorator, Component, Node, UITransform, Sprite, Button, log, Vec2, Vec3, tween, v2, v3 } from 'cc';
-import { CellBack } from './CellBack';
 import {Cell} from "../../logic/cell/Cell";
 import {GameFieldIcons} from "../game/GameFieldIcons";
 import {Tile, TileEvent} from "../../logic/tiles/Tile";

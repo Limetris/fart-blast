@@ -1,7 +1,6 @@
 import {BonusType} from "../../entities/EntityTile";
 import { TileBonus } from "./TileBonus";
 import {Tile, TilesHit} from "../Tile";
-import {RocketDirection} from "./TileRocket";
 
 export class TileBomb extends  TileBonus {
 

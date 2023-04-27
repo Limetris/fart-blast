@@ -1,6 +1,5 @@
 import {CellDataAsUnion, CellType, ICellData} from "../entities/EntityCell";
 import {Tile, TilesHit} from "../tiles/Tile";
-import TileFactory from "../TileFactory";
 import {CellTiles} from "./CellTiles";
 import {CellGroup} from "../tiles/CellGroup";
 
