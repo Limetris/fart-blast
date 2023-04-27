@@ -4,13 +4,6 @@ const { ccclass, property } = _decorator;
 
 @ccclass('WindowGameOver')
 export class WindowGameOver extends WindowBase {
-
-    start() {
-
-    }
-
-    update(deltaTime: number) {
-
-    }
+    static ID = 'WindowGameOver';
 }
 

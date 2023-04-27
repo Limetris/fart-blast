@@ -5,7 +5,7 @@ import {GFStateShuffle} from "../field/states/GFStateShuffle";
 import { Tile } from "../tiles/Tile";
 
 export class BoosterShuffle extends Booster {
-    readonly name: string = this.constructor.name;
+    static ID = 'BoosterShuffle';
 
     apply(gameField: GameFieldLogic): boolean {
         if (!super.apply(gameField))

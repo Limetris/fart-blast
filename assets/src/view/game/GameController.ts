@@ -1,11 +1,8 @@
 import { _decorator, Component, Node, assert } from 'cc';
 import {LevelsConfig} from "../LevelsConfig";
 import EventManager from "../../logic/EventManager";
-import {ViewCellEvent} from "../cell/ViewCell";
-import {Cell} from "../../logic/cell/Cell";
 import { GameFieldView } from './GameFieldView';
 import {GameFieldLogic} from "../../logic/field/GameFieldLogic";
-import {GFStateShuffle} from "../../logic/field/states/GFStateShuffle";
 import {GFStateGameOver} from "../../logic/field/states/GFStateGameOver";
 import {GFStateWin} from "../../logic/field/states/GFStateWin";
 import {WindowManager} from "../windows/WindowManager";
@@ -56,8 +53,8 @@ export class GameController extends Component {
     private _initListeners() {
         EventManager.subscribe(GFStateWin.ID, this._onStateWin.bind(this), this);
         EventManager.subscribe(GFStateGameOver.ID, this._onStateGameOver.bind(this), this);
-        EventManager.subscribe(ButtonRetry.name, this._onRetry.bind(this), this);
-        EventManager.subscribe(ButtonNext.name, this._onNext.bind(this), this);
+        EventManager.subscribe(ButtonRetry.ID, this._onRetry.bind(this), this);
+        EventManager.subscribe(ButtonNext.ID, this._onNext.bind(this), this);
     }
 
     private _onStateWin() {

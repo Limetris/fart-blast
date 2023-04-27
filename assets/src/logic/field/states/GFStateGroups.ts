@@ -8,7 +8,7 @@ import {Cell} from "../../cell/Cell";
 import {Group} from "../../tiles/Group";
 
 export class GFStateGroups extends GFState {
-    static ID = GFStateGroups.name;
+    static ID = 'GFStateGroups';
 
     private _groups: CellGroup[];
     onEnter() {

@@ -25,11 +25,12 @@ class BoosterController extends Events {
 
     private _regBuster(boosterClass: any) {
         let booster = new boosterClass();
-        this._boosters.set(booster.name, booster);
+        booster.id = boosterClass.ID;
+        this._boosters.set(booster.id, booster);
     }
 
     getBooster(boosterType: any): Booster | undefined {
-        return this._boosters.get(boosterType.name);
+        return this._boosters.get(boosterType.ID);
     }
 
     has(boosterType: any): boolean {
@@ -51,7 +52,7 @@ class BoosterController extends Events {
         if (booster.isEmpty)
             return false;
 
-        console.log(`active booster: ${booster.name}`);
+        console.log(`active booster: ${booster.id}`);
         this.dispatch(BoosterControllerEvent.active, booster);
         return true;
     }
@@ -62,7 +63,7 @@ class BoosterController extends Events {
             return false;
         if (booster.isEmpty)
             return false;
-        console.log(`select booster: ${booster.name}`);
+        console.log(`select booster: ${booster.id}`);
         this.dispatch(BoosterControllerEvent.selected, booster);
         return true;
     }

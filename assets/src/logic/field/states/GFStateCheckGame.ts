@@ -1,15 +1,10 @@
 import {GFState} from "./GFState";
-import { Cell } from "../../cell/Cell";
-import {GFStateIdle} from "./GFStateIdle";
-import EventManager from "../../EventManager";
-import {GFStateSequenceHit} from "./GFStateSequenceHit";
-import {Tile} from "../../tiles/Tile";
 import {GFStateGroups} from "./GFStateGroups";
 import {GFStateWin} from "./GFStateWin";
 import {GFStateGameOver} from "./GFStateGameOver";
 
 export class GFStateCheckGame extends GFState {
-    static ID = GFStateCheckGame.name;
+    static ID = 'GFStateCheckGame';
 
     onEnter() {
         if (this.context.points >= this.context.gameData.points)

@@ -5,9 +5,9 @@ const { ccclass, property } = _decorator;
 
 @ccclass('ButtonRetry')
 export class ButtonRetry extends ButtonBase {
-
+    static ID = 'ButtonRetry';
     onClick() {
-        EventManager.dispatch(ButtonRetry.name);
+        EventManager.dispatch(ButtonRetry.ID);
     }
 
 

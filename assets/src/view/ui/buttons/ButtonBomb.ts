@@ -15,9 +15,7 @@ export class ButtonBomb extends ButtonBooster {
     get selected() {return this._selected};
     set selected(value: boolean) {
         this._selected = value;
-        log(this._selected);
         this.button.normalColor = this.button.hoverColor = this._selected ? this._selectColor : this._normalColor;
-        log(this.sprite.color);
     }
 
     initBuster(): Booster {
@@ -42,7 +40,7 @@ export class ButtonBomb extends ButtonBooster {
     }
 
     onSelected(booster: Booster) {
-        this.selected = booster.name === this.booster.name;
+        this.selected = booster.id === this.booster.id;
     }
 
     onUnselected() {

@@ -7,7 +7,7 @@ import {TileBomb} from "../tiles/bonus/TileBomb";
 import {GFStateHit} from "../field/states/GFStateHit";
 
 export class BoosterBomb extends Booster {
-    readonly name: string = this.constructor.name;
+    static ID = 'BoosterBomb';
 
     apply(gameField: GameFieldLogic, cell: Cell): boolean {
         if (!super.apply(gameField))

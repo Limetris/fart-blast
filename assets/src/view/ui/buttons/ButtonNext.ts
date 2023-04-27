@@ -5,9 +5,10 @@ const { ccclass, property } = _decorator;
 
 @ccclass('ButtonNext')
 export class ButtonNext extends ButtonBase {
+    static ID = 'ButtonNext';
 
     onClick() {
-        EventManager.dispatch(ButtonNext.name);
+        EventManager.dispatch(ButtonNext.ID);
     }
 
 

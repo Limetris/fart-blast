@@ -27,12 +27,12 @@ export class WindowManager extends Component {
 
     private _initWindows() {
         this._windowPrefabMap.clear();
-
         this.windowsPrefab.forEach((prefab) => {
             // const windowNode = prefab.data as Node;
             // let window = windowNode.getComponent(WindowBase);
             this._windowPrefabMap.set(prefab.data.name, prefab);
-        })
+        });
+        log(this._windowPrefabMap);
     }
 
     private _createWindow(windowType: string): WindowBase {
@@ -45,7 +45,7 @@ export class WindowManager extends Component {
 
     open(windowType: any, ...args: any[]) {
         if (typeof windowType !== 'string')
-            windowType = windowType.name;
+            windowType = windowType.ID;
 
         let window = this._createWindow(windowType);
         if(!window)

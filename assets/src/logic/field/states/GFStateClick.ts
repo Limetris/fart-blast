@@ -6,7 +6,7 @@ import {GFStateHit} from "./GFStateHit";
 import {GFStateMerge} from "./GFStateMerge";
 
 export class GFStateClick extends GFState {
-    static ID = GFStateClick.name;
+    static ID = 'GFStateClick';
 
     onEnter(cell: Cell) {
         EventManager.dispatch(this.id);

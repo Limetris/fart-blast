@@ -1,6 +1,5 @@
 import {GFState} from "./GFState";
 import { Cell } from "../../cell/Cell";
-import {GFStateIdle} from "./GFStateIdle";
 import EventManager from "../../EventManager";
 import {GFStateDrop} from "./GFStateDrop";
 import {Tile} from "../../tiles/Tile";
@@ -8,7 +7,7 @@ import {BonusGroup} from "../../tiles/BonusGroup";
 import {GFStateSequenceHit} from "./GFStateSequenceHit";
 
 export class GFStateMerge extends GFState {
-    static ID = GFStateMerge.name;
+    static ID = 'GFStateMerge';
 
     tiles: Tile[] = [];
     cell: Cell;

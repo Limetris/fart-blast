@@ -1,13 +1,11 @@
 import {GFState} from "./GFState";
 import { Cell } from "../../cell/Cell";
-import {GFStateIdle} from "./GFStateIdle";
 import EventManager from "../../EventManager";
-import {GFStateSequenceHit} from "./GFStateSequenceHit";
 import {Tile} from "../../tiles/Tile";
 import {GFStateGroups} from "./GFStateGroups";
 
 export class GFStateShuffle extends GFState {
-    static ID = GFStateShuffle.name;
+    static ID = 'GFStateShuffle';
 
     onEnter() {
         let tiles: Tile[] = [];

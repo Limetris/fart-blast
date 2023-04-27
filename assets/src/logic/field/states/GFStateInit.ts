@@ -3,7 +3,7 @@ import EventManager from "../../EventManager";
 import {GFStateGroups} from "./GFStateGroups";
 
 export class GFStateInit extends GFState {
-    static ID = GFStateInit.name;
+    static ID = 'GFStateInit';
 
     onEnter() {
         EventManager.dispatch(this.id);

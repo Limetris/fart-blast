@@ -4,6 +4,6 @@ const { ccclass, property } = _decorator;
 
 @ccclass('WindowWin')
 export class WindowWin extends WindowBase {
-
+    static ID = 'WindowWin';
 }
 
