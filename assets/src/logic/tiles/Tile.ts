@@ -13,6 +13,8 @@ export enum TileEvent {
     changeCell
 }
 
+export type TilesHit = Tile[][];
+
 export class Tile extends  TileBase {
 
     protected hp: number = 1;
@@ -46,10 +48,10 @@ export class Tile extends  TileBase {
         this._cell = undefined;
     }
 
-    hit(): Tile[] {
+    hit(): TilesHit {
         this.hp--;
         this.dispatch(TileEvent.hit, this);
-        return [this];
+        return [[this]];
     }
 
     destroy() {
@@ -92,5 +94,16 @@ export class Tile extends  TileBase {
 
     get isColor(): boolean {
         return this.typeString in ColorType;
+    }
+
+    static tilesHitMerge(tilesSrc: TilesHit, tilesDst: TilesHit) {
+        tilesSrc.forEach((valuesSrc, i) => {
+            let valueDst = tilesDst[i];
+            if (!valueDst) {
+                valueDst = [];
+                tilesDst.push(valueDst);
+            }
+            valueDst.push(...valuesSrc);
+        })
     }
 }

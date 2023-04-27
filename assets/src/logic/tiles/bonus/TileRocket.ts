@@ -1,7 +1,7 @@
 import {BonusType, COLORS} from "../../entities/EntityTile";
 import { TileBonus } from "./TileBonus";
 import EnumToArray from "../../utils/EnumToArray";
-import {Tile, TileEvent} from "../Tile";
+import {Tile, TileEvent, TilesHit} from "../Tile";
 
 export enum RocketDirection {
     horizontal,
@@ -20,47 +20,52 @@ export class TileRocket extends  TileBonus {
         this.direction = Math.floor(Math.random() * 2);
     }
 
-    hit(): Tile[] {
-        let tiles: Tile[] = super.hit();
+    hit(): TilesHit {
+        let tiles = super.hit();
 
         switch (this.direction) {
             case RocketDirection.horizontal:
-                tiles.push(...this._hitHorizontal());
+                Tile.tilesHitMerge(this._hitHorizontal(), tiles);
                 break;
             case RocketDirection.vertical:
-                tiles.push(...this._hitVertical());
+                Tile.tilesHitMerge(this._hitVertical(), tiles);
                 break;
             case RocketDirection.cross:
-                tiles.push(...this._hitHorizontal());
-                tiles.push(...this._hitVertical());
+                Tile.tilesHitMerge(this._hitHorizontal(), tiles);
+                Tile.tilesHitMerge(this._hitVertical(), tiles);
                 break;
         }
 
         return tiles;
     }
 
-    private _hitHorizontal(): Tile [] {
-        let tiles: Tile[] = [];
+    private _hitHorizontal(): TilesHit {
+        let tiles: TilesHit = [];
 
-        for (let y = this.y - this.radius; y <= this.y + this.radius; y++) {
-            for (let i = 1; i < this.gameField.columnCount; i++) {
-                tiles.push(...this.gameField.hitCell(this.x + i, y));
-                tiles.push(...this.gameField.hitCell(this.x - i, y));
+        for (let i = 1; i < this.gameField.columnCount; i++) {
+            let tilesGroup: TilesHit = [];
+            for (let y = this.y - this.radius; y <= this.y + this.radius; y++) {
+                Tile.tilesHitMerge(this.gameField.hitCell(this.x + i, y), tilesGroup);
+                Tile.tilesHitMerge(this.gameField.hitCell(this.x - i, y), tilesGroup);
             }
+            tiles.push(...tilesGroup);
         }
         return tiles;
     }
 
     private _hitVertical() {
-        let tiles: Tile[] = [];
-        for (let x = this.x - this.radius; x <= this.x + this.radius; x++) {
-            for (let i = 1; i < this.gameField.rowCount; i++) {
-                tiles.push(...this.gameField.hitCell(x, this.y + i));
-                tiles.push(...this.gameField.hitCell(x, this.y - i));
+        let tiles: TilesHit = [];
+        for (let i = 1; i < this.gameField.rowCount; i++) {
+            let tilesGroup: TilesHit = [];
+            for (let x = this.x - this.radius; x <= this.x + this.radius; x++) {
+                Tile.tilesHitMerge(this.gameField.hitCell(x, this.y + i), tilesGroup);
+                Tile.tilesHitMerge(this.gameField.hitCell(x, this.y - i), tilesGroup);
             }
+            tiles.push(...tilesGroup);
         }
         return tiles;
     }
+
 
 
 }

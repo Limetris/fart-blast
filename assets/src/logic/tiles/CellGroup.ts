@@ -1,5 +1,5 @@
 import {GameFieldLogic} from "../field/GameFieldLogic";
-import {Tile} from "./Tile";
+import {Tile, TilesHit} from "./Tile";
 import { Cell } from "../cell/Cell";
 import {GameFieldCells} from "../field/GameFieldCells";
 import {BonusType, ColorType, TileType} from "../entities/EntityTile";
@@ -40,8 +40,8 @@ export class CellGroup {
         return tiles;
     }
 
-    hit(cell: Cell): Tile[] {
-        let tiles: Tile[] = [];
+    hit(cell: Cell): TilesHit {
+        let tiles: Tile[][] = [];
         this.cells.forEach((cell) => {
             if(cell.canHit) {
                 tiles.push(...cell.hit());
@@ -66,7 +66,7 @@ export class CellGroup {
         let tile = cell.create(BonusType[bonusType] as CellDataAsUnion);
 
         if (tile.typeString === BonusType[BonusType.disco]) {
-            let tileDisco = tile as TileDisco;
+            let tileDisco = (tile as any) as TileDisco;
             tileDisco.color = tileOrigin.type as ColorType;
         }
         return [tile];

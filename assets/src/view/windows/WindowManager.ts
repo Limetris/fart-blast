@@ -2,7 +2,6 @@ import { _decorator, Component, Node, assert, Prefab, log, instantiate } from 'c
 import {WindowBase} from "./WindowBase";
 const { ccclass, property } = _decorator;
 
-type WindowMap = Map<string, WindowBase>;
 type WindowPrefabMap = Map<string, Prefab>;
 
 @ccclass('WindowManager')
@@ -12,7 +11,6 @@ export class WindowManager extends Component {
     windowsPrefab: Prefab[] = [];
 
     private _windowPrefabMap: WindowPrefabMap = new Map<string, Prefab>();
-    private _currentWindow: WindowBase;
     private static _instance: WindowManager = null;
 
     public static get instance(): WindowManager {
@@ -41,7 +39,7 @@ export class WindowManager extends Component {
         let prefab = this._windowPrefabMap.get(windowType);
         if (!prefab)
             return;
-        let node = instantiate(prefab)
+        let node = instantiate(prefab);
         return node.getComponent(WindowBase);
     }
 
@@ -55,10 +53,5 @@ export class WindowManager extends Component {
 
         window.node.setParent(this.node);
         window.open(args);
-        this._currentWindow = window;
-    }
-
-    close(){
-
     }
 }

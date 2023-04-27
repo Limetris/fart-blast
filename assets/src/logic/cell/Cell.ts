@@ -1,5 +1,5 @@
 import {CellDataAsUnion, CellType, ICellData} from "../entities/EntityCell";
-import {Tile} from "../tiles/Tile";
+import {Tile, TilesHit} from "../tiles/Tile";
 import TileFactory from "../TileFactory";
 import {CellTiles} from "./CellTiles";
 import {CellGroup} from "../tiles/CellGroup";
@@ -17,7 +17,7 @@ export class Cell extends CellTiles {
         return !this.isHole && !this.isEmpty && this.tile.isAlive;
     }
 
-    hit(): Tile[] {
+    hit(): TilesHit {
         let tiles = this.tile?.hit();
         this.pop();
         return tiles;

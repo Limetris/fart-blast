@@ -7,7 +7,7 @@ import {GFStateClick} from "./states/GFStateClick";
 import {GFStateIdle} from "./states/GFStateIdle";
 import {Events} from "../Events";
 import {GFStateGroups} from "./states/GFStateGroups";
-import {Tile} from "../tiles/Tile";
+import {Tile, TilesHit} from "../tiles/Tile";
 import BoosterController, {BoosterControllerEvent} from "../boosters/BoosterController";
 import {Booster} from "../boosters/Booster";
 import EventManager from "../EventManager";
@@ -71,9 +71,12 @@ export class GameFieldLogic extends GameFieldCells {
         BoosterController.subscribe(BoosterControllerEvent.unselected, this._onUnselectBooster.bind(this), this);
     }
 
-    private _onStateHit(tiles: Tile[]) {
-        this.points += tiles.length;
+    private _onStateHit(tilesHit: TilesHit) {
+        tilesHit.forEach((tiles)=> {
+            this.points += tiles.length;
+        });
     }
+
 
 
     private _onStateMerge(cell: Cell, tiles: Tile[]) {

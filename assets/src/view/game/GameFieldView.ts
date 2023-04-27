@@ -4,7 +4,7 @@ import {ViewCell, ViewCellEvent} from '../cell/ViewCell';
 import EventManager from "../../logic/EventManager";
 import {GFStateClick} from "../../logic/field/states/GFStateClick";
 import {GFStateHit} from "../../logic/field/states/GFStateHit";
-import {Tile} from "../../logic/tiles/Tile";
+import {Tile, TilesHit} from "../../logic/tiles/Tile";
 import {GFStateIdle} from "../../logic/field/states/GFStateIdle";
 import {GFStateGroups} from "../../logic/field/states/GFStateGroups";
 import {Icon} from "../tiles/Icon";
@@ -89,19 +89,20 @@ export class GameFieldView extends GameFieldIcons {
 
     }
 
-    private _onStateHit(tiles: Tile[]) {
-        // TODO: очередь сгорания должна быть группами, чтобы более правильно отраатывать бомбы и ракеты
+    private _onStateHit(tilesHit: TilesHit) {
         let promises = [];
         let delay = 0;
-        tiles.forEach((tile)=> {
-            let viewCell = this.getCell(tile.x, tile.y);
-            let icon = viewCell.icon;
-            let promise = new Promise( resolve => setTimeout(() => {
-                icon.tile.destroy();
-                resolve();
-            }, delay * 1000) );
-            delay += 0.015;
-            promises.push(promise);
+        tilesHit.forEach((tiles)=> {
+            tiles.forEach((tile)=> {
+                let viewCell = this.getCell(tile.x, tile.y);
+                let icon = viewCell.icon;
+                let promise = new Promise(resolve => setTimeout(() => {
+                    icon.tile.destroy();
+                    resolve();
+                }, delay * 1000));
+                promises.push(promise);
+            });
+            delay += 0.025;
         });
         log('wait hit...');
         Promise.all(promises).then(()=> {

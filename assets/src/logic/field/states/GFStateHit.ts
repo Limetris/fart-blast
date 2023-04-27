@@ -3,12 +3,12 @@ import { Cell } from "../../cell/Cell";
 import {GFStateIdle} from "./GFStateIdle";
 import EventManager from "../../EventManager";
 import {GFStateDrop} from "./GFStateDrop";
-import {Tile} from "../../tiles/Tile";
+import {Tile, TilesHit} from "../../tiles/Tile";
 
 export class GFStateHit extends GFState {
     static ID = GFStateHit.name;
 
-    hitTiles: Tile[] = [];
+    hitTiles: TilesHit = [];
 
     onEnter(cell: Cell) {
         if (cell.group)

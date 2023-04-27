@@ -1,6 +1,6 @@
 import {BonusType} from "../../entities/EntityTile";
 import { TileBonus } from "./TileBonus";
-import {Tile} from "../Tile";
+import {Tile, TilesHit} from "../Tile";
 import {RocketDirection} from "./TileRocket";
 
 export class TileBomb extends  TileBonus {
@@ -11,14 +11,14 @@ export class TileBomb extends  TileBonus {
     }
 
 
-    hit(): Tile[] {
-        let tiles: Tile[] = super.hit();
+    hit(): TilesHit {
+        let tiles = super.hit();
 
         for (let x = this.x - this.radius; x <= this.x + this.radius; x++) {
             for (let y = this.y - this.radius; y <= this.y + this.radius; y++) {
                 if (this.x === x && this.y === y)
                     continue;
-                tiles.push(...this.gameField.hitCell(x, y));
+                Tile.tilesHitMerge(this.gameField.hitCell(x, y), tiles);
             }
         }
         return tiles;
