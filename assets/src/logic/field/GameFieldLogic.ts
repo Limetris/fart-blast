@@ -39,14 +39,8 @@ export class GameFieldLogic extends GameFieldCells {
     constructor(gameFieldData: IGameFieldData) {
         super(gameFieldData);
         this.initFsm();
-        this._initGoals();
         this._initListeners();
         this.toState(GFStateInit);
-    }
-
-    private _initGoals() {
-        this.steps = this.gameData.steps;
-        this.points = 0;
     }
 
     click(cell: Cell) {
@@ -72,8 +66,6 @@ export class GameFieldLogic extends GameFieldCells {
             this.points += tiles.length;
         });
     }
-
-
 
     private _onStateMerge(cell: Cell, tiles: Tile[]) {
         this.points += tiles.length;

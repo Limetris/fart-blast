@@ -43,6 +43,44 @@ export class GameFieldIcons extends Component {
         EventManager.unsubscribeTag(this);
     }
 
+    getCellPosition (x: number, y: number): Vec3 {
+        return v3(x * this.cellSize.width + this._offset.x, - y * this.cellSize.height + this._offset.y, 0);
+    }
+
+    getColumn(x: number): ViewCell[] | undefined {
+        return this._cells[x];
+    }
+
+    getCell(x: number, y: number): ViewCell | undefined {
+        let column = this.getColumn(x);
+        if (!column)
+            return;
+        return column[y];
+    }
+
+    eachCell(callback: ViewCellCallback) {
+        if (!callback)
+            return;
+        this._cells.forEach((viewColumn)=> {
+            viewColumn.forEach((viewCell)=>{
+                callback(viewCell);
+            })
+        });
+    }
+
+    protected getStartColumnWorldCoordinate(x: number): Vec2 | undefined {
+        const column = this._gameField.columns[x];
+        if(!column)
+            return;
+        const topCell = column.topCell;
+        if (!topCell)
+            return;
+
+        const topViewCell = this.getCell(x, topCell.y);
+        let worldPos = topViewCell.node.worldPosition;
+        return v2(worldPos.x, worldPos.y + this.cellSize.height * 0.5);
+    }
+
     private _getOffset(): Vec2 {
         const transform = this.cellsNode.getComponent(UITransform);
         return v2(
@@ -84,43 +122,5 @@ export class GameFieldIcons extends Component {
         node.setPosition(this.getCellPosition(x, y));
     }
 
-    getCellPosition (x: number, y: number): Vec3 {
-        return v3(x * this.cellSize.width + this._offset.x, - y * this.cellSize.height + this._offset.y, 0);
-    }
-
-    getColumn(x: number): ViewCell[] | undefined {
-        return this._cells[x];
-    }
-
-    getCell(x: number, y: number): ViewCell | undefined {
-        let column = this.getColumn(x);
-        if (!column)
-            return;
-        return column[y];
-    }
-
-    eachCell(callback: ViewCellCallback) {
-        if (!callback)
-            return;
-        this._cells.forEach((viewColumn)=> {
-            viewColumn.forEach((viewCell)=>{
-                callback(viewCell);
-            })
-        });
-    }
-
-
-    protected _getStartColumnWorldCoordinate(x: number): Vec2 | undefined {
-        const column = this._gameField.columns[x];
-        if(!column)
-            return;
-        const topCell = column.topCell;
-        if (!topCell)
-            return;
-
-        const topViewCell = this.getCell(x, topCell.y);
-        let worldPos = topViewCell.node.worldPosition;
-        return v2(worldPos.x, worldPos.y + this.cellSize.height * 0.5);
-    }
 }
 

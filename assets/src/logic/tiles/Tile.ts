@@ -1,7 +1,6 @@
-import {BonusType, ColorType, TileType} from "../entities/EntityTile";
+import {TileType} from "../entities/EntityTile";
 import {TileBase} from "./TileBase";
 import {CellTiles} from "../cell/CellTiles";
-import {GameFieldCells} from "../field/GameFieldCells";
 
 export enum TileEvent {
     hit,
@@ -16,34 +15,10 @@ export type TilesHit = Tile[][];
 export class Tile extends  TileBase {
 
     protected hp: number = 1;
-
-    private _x: number;
-    private _y: number;
-    private _cell: CellTiles;
-    private _gameField: GameFieldCells;
-
-    get x(): number { return this._x; };
-    get y(): number { return this._y; };
-    get cell(): CellTiles { return this._cell; };
-    get gameField(): GameFieldCells { return this._gameField; };
+    get isAlive(): boolean { return this.hp > 0; }
 
     constructor(type: TileType) {
         super(type);
-    }
-
-    setGameField(gameField: GameFieldCells) {
-        this._gameField = gameField;
-    }
-
-    setCell(cell: CellTiles) {
-        this._cell = cell;
-        this._x = this._cell.x;
-        this._y = this._cell.y;
-        this.dispatch(TileEvent.setCell, this);
-    }
-
-    resetCell() {
-        this._cell = undefined;
     }
 
     hit(): TilesHit {
@@ -59,9 +34,9 @@ export class Tile extends  TileBase {
     }
 
     drop() {
-        let column = this._gameField.getColumn(this._x);
+        let column = this.gameField.getColumn(this.x);
         let cell: CellTiles;
-        for(let y = this._y + 1; y < column.cells.length; y++) {
+        for(let y = this.y + 1; y < column.cells.length; y++) {
             let cellNext = column.cells[y];
             if (cellNext.isHole)
                 continue;
@@ -76,22 +51,10 @@ export class Tile extends  TileBase {
     }
 
     rebind(cell: CellTiles) {
-        let prevCell = this._cell;
+        let prevCell = this.cell;
         prevCell.remove(this);
         cell.insert(this);
         this.dispatch(TileEvent.changeCell, this, prevCell, cell);
-    }
-
-    get isAlive(): boolean {
-        return this.hp > 0;
-    }
-
-    get isBonus(): boolean {
-        return this.typeString in BonusType;
-    }
-
-    get isColor(): boolean {
-        return this.typeString in ColorType;
     }
 
     static tilesHitMerge(tilesSrc: TilesHit, tilesDst: TilesHit) {

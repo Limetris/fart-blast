@@ -2,10 +2,8 @@ import { _decorator, Component, Node, instantiate, UITransform, Prefab, Vec2, Si
 import {Cell} from "../../logic/cell/Cell";
 import {ViewCell, ViewCellEvent} from '../cell/ViewCell';
 import EventManager from "../../logic/EventManager";
-import {GFStateClick} from "../../logic/field/states/GFStateClick";
 import {GFStateHit} from "../../logic/field/states/GFStateHit";
 import {Tile, TilesHit} from "../../logic/tiles/Tile";
-import {GFStateIdle} from "../../logic/field/states/GFStateIdle";
 import {GFStateGroups} from "../../logic/field/states/GFStateGroups";
 import {Icon} from "../tiles/Icon";
 import {GFStateDrop} from "../../logic/field/states/GFStateDrop";
@@ -13,7 +11,6 @@ import {GFStateMerge} from "../../logic/field/states/GFStateMerge";
 import {Column, ColumnEvent} from "../../logic/field/Column";
 import {GameFieldIcons} from "./GameFieldIcons";
 import {GFStateShuffle} from "../../logic/field/states/GFStateShuffle";
-import {GFStateInit} from "../../logic/field/states/GFStateInit";
 import {IGameFieldData} from "../../logic/entities/EntityGame";
 const { ccclass, property } = _decorator;
 
@@ -39,23 +36,27 @@ export class GameFieldView extends GameFieldIcons {
     }
 
     private _initListeners() {
-        EventManager.unsubscribeTag(this);
         EventManager.subscribe(ViewCellEvent.click, this._onCellClick.bind(this), this);
         EventManager.subscribe(ColumnEvent.fill, this._onColumnFill.bind(this), this);
 
-        EventManager.subscribe(GFStateInit.ID, this._onStateInit.bind(this), this);
         EventManager.subscribe(GFStateGroups.ID, this._onStateGroups.bind(this), this);
-        EventManager.subscribe(GFStateIdle.ID, this._onStateIdle.bind(this), this);
-        EventManager.subscribe(GFStateClick.ID, this._onStateClick.bind(this), this);
-
         EventManager.subscribe(GFStateHit.ID, this._onStateHit.bind(this), this);
         EventManager.subscribe(GFStateMerge.ID, this._onStateMerge.bind(this), this);
         EventManager.subscribe(GFStateDrop.ID, this._onStateDrop.bind(this), this);
         EventManager.subscribe(GFStateShuffle.ID, this._onStateShuffle.bind(this), this);
     }
 
+    private _onCellClick(viewCell: ViewCell) {
+        this._gameField.click(viewCell.cell);
+    }
+
+    private _onStateGroups() {
+        // TODO: индикация резулттата объединения на тайлах
+        this._gameField.state.next();
+    }
+
     private _onColumnFill(column: Column, cells: Cell[]) {
-        let startPos = this._getStartColumnWorldCoordinate(column.x);
+        let startPos = this.getStartColumnWorldCoordinate(column.x);
         cells.forEach((cell, i) => {
             let viewCell = this.getCell(cell.x, cell.y);
             if(!viewCell)
@@ -64,28 +65,6 @@ export class GameFieldView extends GameFieldIcons {
             if (icon)
                 icon.node.setWorldPosition(startPos.x, startPos.y + (cells.length - i) * this.cellSize.height, 0);
         });
-    }
-
-    private _onStateInit() {
-
-    }
-
-    private _onStateGroups() {
-        // TODO: индикация резулттата объединения на тайлах
-        this._gameField.state.next();
-    }
-
-    private _onStateIdle() {
-
-    }
-
-
-    private _onCellClick(viewCell: ViewCell) {
-        this._gameField.click(viewCell.cell);
-    }
-
-    private _onStateClick() {
-
     }
 
     private _onStateHit(tilesHit: TilesHit) {
@@ -109,7 +88,6 @@ export class GameFieldView extends GameFieldIcons {
         } );
     }
 
-
     private _onStateMerge(cell: Cell, tiles: Tile[]) {
         let promises = [];
         let viewCellTarget = this.getCell(cell.x, cell.y);
@@ -123,7 +101,6 @@ export class GameFieldView extends GameFieldIcons {
             this._gameField.state.next();
         } );
     }
-
 
     private _onStateDrop() {
         let promises = [];
@@ -145,7 +122,6 @@ export class GameFieldView extends GameFieldIcons {
         } );
     }
 
-
     private _onStateShuffle() {
         let promises = [];
         this._cells.forEach((viewColumn)=> {
@@ -161,7 +137,5 @@ export class GameFieldView extends GameFieldIcons {
             this._gameField.state.next();
         } );
     }
-
-
 }
 

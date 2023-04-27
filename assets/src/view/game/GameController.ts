@@ -16,7 +16,6 @@ const { ccclass, property } = _decorator;
 export class GameController extends Component {
 
     private static _instance: GameController = null;
-
     public static get instance(): GameController {
         assert(this._instance, "GameController instance is null");
         return this._instance;

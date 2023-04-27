@@ -25,9 +25,5 @@ export class DiscoIcon extends BonusIcon {
     start() {
         this.sprite.color = new Color(Colors[this.tile.color]);
     }
-
-    update(deltaTime: number) {
-
-    }
 }
 

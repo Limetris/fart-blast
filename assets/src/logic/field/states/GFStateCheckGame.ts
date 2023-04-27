@@ -16,6 +16,7 @@ export class GFStateCheckGame extends GFState {
     }
 
     next() {
+
     }
 
     onExit() {

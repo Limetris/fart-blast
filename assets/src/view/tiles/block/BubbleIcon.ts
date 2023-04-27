@@ -4,12 +4,6 @@ const { ccclass, property } = _decorator;
 
 @ccclass('BubbleIcon')
 export class BubbleIcon extends BlockIcon {
-    start() {
 
-    }
-
-    update(deltaTime: number) {
-
-    }
 }
 

@@ -5,12 +5,11 @@ export class GFStateWin extends GFState {
     static ID = 'GFStateWin';
 
     onEnter() {
-
         EventManager.dispatch(this.id);
     }
 
     next() {
-        // this.context.toState(GFStateGroups);
+
     }
 
     onExit() {

@@ -19,9 +19,5 @@ export class RenderNode extends Component {
         this._transform = this.node.getComponent(UITransform);
 
     }
-
-    update(deltaTime: number) {
-
-    }
 }
 

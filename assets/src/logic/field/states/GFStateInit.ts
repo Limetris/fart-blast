@@ -6,6 +6,7 @@ export class GFStateInit extends GFState {
     static ID = 'GFStateInit';
 
     onEnter() {
+        this._initGoals();
         EventManager.dispatch(this.id);
     }
 
@@ -15,5 +16,10 @@ export class GFStateInit extends GFState {
 
     onExit() {
 
+    }
+
+    private _initGoals() {
+        this.context.steps = this.context.gameData.steps;
+        this.context.points = 0;
     }
 }

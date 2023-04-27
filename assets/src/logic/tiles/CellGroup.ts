@@ -9,27 +9,18 @@ import {TileColor} from "./TileColor";
 export class CellGroup {
 
     protected gameField: GameFieldCells;
-    // protected type: GroupType;
-    // get typeGroup(): GroupType { return this.type; };
     protected cells: Set<Cell> = new Set<Cell>();
-    get size(): number { return this.cells.size; };
 
     constructor(cell: Cell) {
         if (cell.gameField) {
             this.gameField = cell.gameField;
             this._searchTiles(cell);
-            // this.initType();
         }
     }
 
-
-    get canHit(): boolean {
-        return this.size > 1;
-    }
-
-    get canMerge(): boolean {
-        return this.size > 4;
-    }
+    get size(): number { return this.cells.size; };
+    get canHit(): boolean { return this.size > 1; }
+    get canMerge(): boolean { return this.size > 4; }
 
     get tiles(): Tile[] {
         let tiles: Tile[] = [];
@@ -45,10 +36,6 @@ export class CellGroup {
             }
         });
         return tiles;
-    }
-
-    burn(cell: Cell) {
-        this._removeTiles();
     }
 
     merge(cell: Cell): Tile[] {
@@ -69,6 +56,20 @@ export class CellGroup {
         return [tile];
     }
 
+    protected _removeTiles(): Tile[] {
+        let tiles: Tile[] = [];
+        this.cells.forEach((cell) => {
+            tiles.push(cell.pop());
+        });
+        return tiles;
+    }
+
+    protected isEqual(src: Tile, target: Tile): boolean {
+        if (!src || !target)
+            return false;
+        return src.typeString === target.typeString;
+    }
+
     private _getNewTypeTile(): BonusType {
         if(this.size > 8 )
             return BonusType.disco;
@@ -76,14 +77,6 @@ export class CellGroup {
             return BonusType.bomb;
         else if (this.size > 4)
             return BonusType.rocket;
-    }
-
-    protected _removeTiles(): Tile[] {
-        let tiles: Tile[] = [];
-        this.cells.forEach((cell) => {
-            tiles.push(cell.pop());
-        });
-        return tiles;
     }
 
     private _searchTiles(cell: Cell) {
@@ -119,11 +112,5 @@ export class CellGroup {
         cell.setGroup(this);
         this.cells.add(cell);
         return true
-    }
-
-    protected isEqual(src: Tile, target: Tile): boolean {
-        if (!src || !target)
-            return false;
-        return src.typeString === target.typeString;
     }
 }

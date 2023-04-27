@@ -16,6 +16,19 @@ export class GFStateGroups extends GFState {
         EventManager.dispatch(this.id);
     }
 
+    next() {
+        if (this._groups.length > 0)
+            this.context.toState(GFStateIdle);
+        else if (this.context.prevState.id !== GFStateShuffle.ID)
+            this.context.toState(GFStateShuffle);
+        else
+            this.context.toState(GFStateGameOver);
+    }
+
+    onExit() {
+
+    }
+
     private _searchGroups () {
         this._clearGroups();
         this.context.eachCell((cell: Cell) => {
@@ -32,18 +45,5 @@ export class GFStateGroups extends GFState {
             cell.resetGroup();
         });
         this._groups = [];
-    }
-
-    next() {
-        if (this._groups.length > 0)
-            this.context.toState(GFStateIdle);
-        else if (this.context.prevState.id !== GFStateShuffle.ID)
-            this.context.toState(GFStateShuffle);
-        else
-            this.context.toState(GFStateGameOver);
-    }
-
-    onExit() {
-
     }
 }

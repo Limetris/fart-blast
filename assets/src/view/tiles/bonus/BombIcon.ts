@@ -16,9 +16,5 @@ export class BombIcon extends BonusIcon {
     start() {
         super.start();
     }
-
-    update(deltaTime: number) {
-
-    }
 }
 

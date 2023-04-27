@@ -7,16 +7,15 @@ import {Tile, TilesHit} from "../../tiles/Tile";
 export class GFStateHit extends GFState {
     static ID = 'GFStateHit';
 
-    hitTiles: TilesHit = [];
+    private _hitTiles: TilesHit = [];
 
     onEnter(cell: Cell) {
         if (cell.group)
-            this.hitTiles = cell.group.hit(cell);
+            this._hitTiles = cell.group.hit(cell);
         else if(cell.canHit)
-            this.hitTiles = cell.hit();
+            this._hitTiles = cell.hit();
 
-        console.log(this.hitTiles);
-        EventManager.dispatch(this.id, this.hitTiles);
+        EventManager.dispatch(this.id, this._hitTiles);
     }
 
     next(cell: Cell) {

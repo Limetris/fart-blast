@@ -14,9 +14,5 @@ export class BlockIcon extends Icon {
     start() {
         super.start();
     }
-
-    update(deltaTime: number) {
-
-    }
 }
 

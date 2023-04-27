@@ -9,11 +9,6 @@ export class GFStateClick extends GFState {
     static ID = 'GFStateClick';
 
     onEnter(cell: Cell) {
-        EventManager.dispatch(this.id);
-        this.next(cell);
-    }
-
-    next(cell: Cell) {
         if (cell.canHit && cell.group) {
             if(cell.group.canMerge) {
                 this.context.steps--;
@@ -29,6 +24,10 @@ export class GFStateClick extends GFState {
         else {
             this.context.toState(GFStateIdle);
         }
+    }
+
+    next(cell: Cell) {
+
     }
 
     onExit() {

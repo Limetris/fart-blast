@@ -14,17 +14,8 @@ export class BonusGroup extends CellGroup {
         super(cell);
     }
 
-    get canHit(): boolean {
-        return this.size > 0;
-    }
-
-    get canMerge(): boolean {
-        return this.size > 1;
-    }
-
-    protected _burn(cell: Cell) {
-        this._removeTiles();
-    }
+    get canHit(): boolean { return this.size > 0;  }
+    get canMerge(): boolean { return this.size > 1; }
 
     protected _merge(cell: Cell): Tile[] {
         return this._generateTiles(cell, this._removeTiles());

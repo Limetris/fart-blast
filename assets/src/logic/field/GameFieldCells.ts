@@ -8,15 +8,11 @@ import {Tile, TilesHit} from "../tiles/Tile";
 export class GameFieldCells extends  GameFieldData {
 
     private _columns: Column[];
+    get columns(): Column[] { return this._columns; }
 
     constructor(gameFieldData: IGameFieldData) {
         super(gameFieldData);
-
         this._parse();
-    }
-
-    get columns(): Column[] {
-        return this._columns;
     }
 
     getCell(x: number, y: number): Cell {
@@ -46,19 +42,6 @@ export class GameFieldCells extends  GameFieldData {
         return [];
     }
 
-    private _parse () {
-        this._columns = [];
-
-        this.gameData.field.forEach((columnData, x) => {
-            let column = this._createColumn(x, columnData);
-            this._columns.push(column);
-        });
-    }
-
-    private _createColumn(x: number, columnData: ColumnData): Column {
-        return new Column(this, x, columnData);
-    }
-
     getMatrixIds() {
         let matrix = [];
         for(let y = 0; y < this.rowCount; y++) {
@@ -70,6 +53,19 @@ export class GameFieldCells extends  GameFieldData {
         }
         return matrix;
     }
+
+    private _parse () {
+        this._columns = [];
+        this.gameData.field.forEach((columnData, x) => {
+            let column = this._createColumn(x, columnData);
+            this._columns.push(column);
+        });
+    }
+
+    private _createColumn(x: number, columnData: ColumnData): Column {
+        return new Column(this, x, columnData);
+    }
+
 
 }
 

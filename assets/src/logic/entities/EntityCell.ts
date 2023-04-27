@@ -15,4 +15,3 @@ export interface ICellData extends ICellBase{
 }
 
 export type CellDataAsUnion = keyof typeof CellType | keyof typeof ColorType | keyof typeof BonusType | keyof typeof BlockType
-// export type CellDataAsUnion = CellType | ColorType | BonusType | BlockType;

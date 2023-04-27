@@ -18,22 +18,9 @@ export class CellTiles extends CellBase {
 
     private _tiles: Tile[] = [];
 
-    constructor(x: number, y: number, type: CellType = CellType.cell) {
-        super(x, y, type);
-    }
-
-    get isEmpty(): boolean {
-        return (this._tiles.length === 0);
-    }
-
-    get tiles(): Tile[] {
-        return this._tiles;
-    }
-
-    get tile(): Tile | undefined {
-        return this._tiles[this._tiles.length - 1];
-    }
-
+    get isEmpty(): boolean { return (this._tiles.length === 0); }
+    get tiles(): Tile[] { return this._tiles; }
+    get tile(): Tile | undefined { return this._tiles[this._tiles.length - 1];  }
 
     create (obj: CellDataAsUnion): Tile {
         if(this.isHole)
@@ -89,24 +76,16 @@ export class CellTiles extends CellBase {
         this._tileReset(tile);
     }
 
-    private _tileReset(tile: Tile) {
-        tile.unsubscribeTag(this);
-        tile.resetCell();
-    }
-
-    private _push(tile: Tile) {
-        if (!tile)
-            return;
-        this._tiles.push(tile);
-
-        tile.subscribe(TileEvent.destroy, this.onTileDestroy.bind(this), this);
-
-        tile.setGameField(this.gameField);
-        tile.setCell(this);
-    }
-
     onTileDestroy(tile: Tile) {
         this.remove(tile);
+    }
+
+    toString() {
+        if(this.isHole)
+            return '_';
+        if(this.isEmpty)
+            return 'e';
+        return TileTypeToShort[this.tile.typeString];
     }
 
     eachNeighbor(callback: CellCallback) {
@@ -124,11 +103,19 @@ export class CellTiles extends CellBase {
             callback(cell);
     }
 
-    toString() {
-        if(this.isHole)
-            return '_';
-        if(this.isEmpty)
-            return 'e';
-        return TileTypeToShort[this.tile.typeString];
+    private _tileReset(tile: Tile) {
+        tile.unsubscribeTag(this);
+        tile.resetCell();
+    }
+
+    private _push(tile: Tile) {
+        if (!tile)
+            return;
+        this._tiles.push(tile);
+
+        tile.subscribe(TileEvent.destroy, this.onTileDestroy.bind(this), this);
+
+        tile.setGameField(this.gameField);
+        tile.setCell(this);
     }
 }

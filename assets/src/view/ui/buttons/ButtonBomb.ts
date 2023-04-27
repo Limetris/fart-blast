@@ -8,6 +8,7 @@ const { ccclass, property } = _decorator;
 @ccclass('ButtonBomb')
 export class ButtonBomb extends ButtonBooster {
 
+    // TODO: механику выбора лучше вынести в базовый класс-выбора
     private _selected: boolean = false;
     private _normalColor: Color;
     private _selectColor: Color;

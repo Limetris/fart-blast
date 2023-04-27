@@ -5,12 +5,11 @@ export class GFStateGameOver extends GFState {
     static ID = 'GFStateGameOver';
 
     onEnter() {
-
         EventManager.dispatch(this.id);
     }
 
     next() {
-        // this.context.toState(GFStateGroups);
+
     }
 
     onExit() {

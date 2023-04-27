@@ -26,13 +26,8 @@ export class Column extends Events {
         this.fill();
     }
 
-    get cells (): Cell[] {
-        return this._cells;
-    }
-
-    get topCell(): Cell | undefined {
-        return this._cells.find(cell => !cell.isHole);
-    }
+    get cells (): Cell[] { return this._cells;  }
+    get topCell(): Cell | undefined {  return this._cells.find(cell => !cell.isHole);  }
 
     getCell(y: number): Cell {
         return this._cells[y];
