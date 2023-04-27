@@ -38,12 +38,10 @@
 - анимации
     * врыва бомб
     * разлёта ракеты
-- звуки
 - блокеры
     * коробка
     * шарик
     * и т.д.
 - маска для обрезки по сгененрированному беку
 - покрыть тестами
-- рефакторинг
 - сборка через gulp ([command reference](https://docs.cocos.com/creator/manual/en/editor/publish/publish-in-command-line.html))

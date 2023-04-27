@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Enum, ParticleSystem2D, log } from 'cc';
+import { _decorator, Component, Node, Enum, ParticleSystem2D, log, AudioSource } from 'cc';
 import {ColorType} from "../../logic/entities/EntityTile";
 import {Icon} from "./Icon";
 const { ccclass, property } = _decorator;
@@ -11,14 +11,21 @@ export class ColorIcon extends Icon {
     })
     type: ColorType;
 
+    // TODO: звук и партиклы лучше вынести в отдельные компоненты
     @property(ParticleSystem2D)
     particle: ParticleSystem2D;
 
-    start() {
-        super.start();
-    }
+    // TODO: для звука лучше сделать общий sound manager чтобы не плодить источники
+    @property(AudioSource)
+    sound: AudioSource;
 
     onTileDestroy() {
+        this.playParticles();
+        this.playSound();
+        super.onTileDestroy();
+    }
+
+    playParticles() {
         if (this.particle) {
             this.particle.node.active = true;
             const worldPos = this.particle.node.worldPosition;
@@ -28,7 +35,15 @@ export class ColorIcon extends Icon {
             this.particle.resetSystem();
             this.particle = undefined;
         }
-        super.onTileDestroy();
+    }
+
+    playSound() {
+        if (this.sound) {
+            this.sound.node.active = true;
+            this.sound.play();
+            this.sound.node.setParent(this.gameFiledView.node);
+            this.sound = undefined;
+        }
     }
 
     onClick() {

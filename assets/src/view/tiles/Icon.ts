@@ -1,8 +1,8 @@
 import { _decorator, Component, Node, Sprite, Color, log, tween, Vec3, UITransform } from 'cc';
-import {IconBase} from "./IconBase";
 import { Cell } from '../../logic/cell/Cell';
 import {Tile, TileEvent} from '../../logic/tiles/Tile';
 import {GameFieldIcons} from "../game/GameFieldIcons";
+import {IconBase} from "./IconBase";
 const { ccclass, property, requireComponent } = _decorator;
 
 @ccclass('Icon')
